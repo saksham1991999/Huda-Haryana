@@ -1,448 +1,376 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
 
-  <!--/ Carousel Star /-->
-  <div class="intro intro-carousel">
-    <div id="carousel" class="owl-carousel owl-theme">
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-1.jpg' %})">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Mount
-                      <br> Olive Road Two</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <!-- Banner -->
+    <div class="parallax" data-background="{%  static 'images/home-parallax-2.jpg' %}" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-2.jpg' %})">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Rino
-                      <br> Venda Road Five</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
+                    <div class="search-container">
+
+                        <!-- Form -->
+                        <h2>Find New Home</h2>
+
+                        <!-- Row With Forms -->
+                        <div class="row with-forms">
+
+                            <!-- Property Type -->
+                            <div class="col-md-3">
+                                <select data-placeholder="Any Type" class="chosen-select-no-single" >
+                                    <option>Apartments</option>
+                                    <option>Houses</option>
+                                    <option>Commercial</option>
+                                    <option>Garages</option>
+                                    <option>Lots</option>
+                                </select>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-md-3">
+                                <select data-placeholder="Any Status" class="chosen-select-no-single" >
+                                    <option>For Sale</option>
+                                    <option>For Rent</option>
+                                </select>
+                            </div>
+
+                            <!-- Main Search Input -->
+                            <div class="col-md-6">
+                                <div class="main-search-input">
+                                    <input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
+                                    <button class="button"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Row With Forms / End -->
+
+                        <!-- Browse Jobs -->
+                        <div class="adv-search-btn">
+                            Need more search options? <a href="listings-list-full-width.html">Advanced Search</a>
+                        </div>
+
+                        <!-- Announce -->
+                        <div class="announce">
+                            We’ve 1000 properties for you!
+                        </div>
+
+                    </div>
+
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="carousel-item-a intro-item bg-image" style="background-image: url({% static 'img/slide-3.jpg' %})">
-        <div class="overlay overlay-a"></div>
-        <div class="intro-content display-table">
-          <div class="table-cell">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-8">
-                  <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345</p>
-                    <h1 class="intro-title mb-4">
-                      <span class="color-b">204 </span> Alira
-                      <br> Roan Road One</h1>
-                    <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <!--/ Carousel end /-->
+    <!-- Banner End -->
 
-  <!--/ Services Star /-->
-  <section class="section-services section-t8">
+    <!-- Content
+    ================================================== -->
+    <!-- Fullwidth Section -->
+    <section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" data-background-color="#ffffff">
+
+        <!-- Content -->
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1 alternative">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Checked-User"></i>
+                        </div>
+
+                        <h3>Agent Finder</h3>
+                        <p>See who specializes in your area, has the most reviews and the right experience to meet your needs.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1 alternative">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Cloud-Computer"></i>
+                        </div>
+
+                        <h3>Modern Technology</h3>
+                        <p>More than 10,000 customers buy or sell a home with us each year. We help people and homes find each together.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1 alternative">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Idea"></i>
+                        </div>
+
+                        <h3>Home Designs Ideas</h3>
+                        <p>Our specialists can help you get started on that home project. Find paint colors, that perfect tile and more. </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <!-- Fullwidth Section / End -->
+
+    <!-- Featured -->
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-wrap d-flex justify-content-between">
-            <div class="title-box">
-              <h2 class="title-a">Our Services</h2>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card-box-c foo">
-            <div class="card-header-c d-flex">
-              <div class="card-box-ico">
-                <span class="fa fa-gamepad"></span>
-              </div>
-              <div class="card-title-c align-self-center">
-                <h2 class="title-c">Buy</h2>
-              </div>
-            </div>
-            <div class="card-body-c">
-              <p class="content-c">
-                Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
-                convallis a pellentesque
-                nec, egestas non nisi.
-              </p>
-            </div>
-            <div class="card-footer-c">
-              <a href="#" class="link-c link-icon">Read more
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-c foo">
-            <div class="card-header-c d-flex">
-              <div class="card-box-ico">
-                <span class="fa fa-usd"></span>
-              </div>
-              <div class="card-title-c align-self-center">
-                <h2 class="title-c">Sell</h2>
-              </div>
-            </div>
-            <div class="card-body-c">
-              <p class="content-c">
-                Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Mauris blandit
-                aliquet elit, eget tincidunt
-                nibh pulvinar a.
-              </p>
-            </div>
-            <div class="card-footer-c">
-              <a href="#" class="link-c link-icon">Read more
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-c foo">
-            <div class="card-header-c d-flex">
-              <div class="card-box-ico">
-                <span class="fa fa-home"></span>
-              </div>
-              <div class="card-title-c align-self-center">
-                <h2 class="title-c">Rent</h2>
-              </div>
-            </div>
-            <div class="card-body-c">
-              <p class="content-c">
-                Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa,
-                convallis a pellentesque
-                nec, egestas non nisi.
-              </p>
-            </div>
-            <div class="card-footer-c">
-              <a href="#" class="link-c link-icon">Read more
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Services End /-->
+        <div class="row">
 
-  <!--/ Property Star /-->
-  <section class="section-property section-t8">
+            <div class="col-md-12">
+                <h3 class="headline margin-bottom-25 margin-top-65">Featured</h3>
+            </div>
+
+            <!-- Carousel -->
+            <div class="col-md-12">
+                <div class="carousel">
+
+                {% for property in properties %}
+                    <!-- Listing Item -->
+                    <div class="carousel-item">
+                        <div class="listing-item compact">
+
+                            <a href="{% url 'core:property' property.id %}" class="listing-img-container">
+
+                                <div class="listing-badges">
+                                    <span class="featured">Featured</span>
+                                    <span>{{ property.get_type_display }}</span>
+                                </div>
+
+                                <div class="listing-img-content">
+                                    <span class="listing-compact-title">{{ property.property_name }} <i>₹ {{ property.total_price }}</i></span>
+
+                                    <ul class="listing-hidden-content">
+                                        <li>City <span>{{ property.city }}</span></li>
+                                        {% if property.type == "R" %}
+                                        <li>Available From <span>{{ property.available_from }}</span></li>
+                                        {% else %}
+                                            <li>Construction Status<span>{{ property.get_construction_status_display }}</span></li>
+                                        {% endif %}
+                                        <li>Beds <span>{{ property.bedrooms }}</span></li>
+                                        <li>Baths <span>{{ property.bathrooms }}</span></li>
+                                    </ul>
+                                </div>
+
+                                <img src="{{ property.image.url }}" alt="">
+                            </a>
+
+                        </div>
+                    </div>
+                    <!-- Listing Item / End -->
+                {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured / End -->
+
+<!-- Fullwidth Section -->
+    <section class="fullwidth margin-top-105" data-background-color="#f7f7f7">
+
+        <!-- Box Headline -->
+        <h3 class="headline-box">What are you looking for?</h3>
+
+        <!-- Content -->
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Office"></i>
+                            <div class="icon-links">
+                                <a href="listings-grid-standard-with-sidebar.html">For Sale</a>
+                                <a href="listings-grid-standard-with-sidebar.html">For Rent</a>
+                            </div>
+                        </div>
+
+                        <h3>Apartments</h3>
+                        <p>Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim donec vel lectus vel felis.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Home-2"></i>
+                            <div class="icon-links">
+                                <a href="listings-grid-standard-with-sidebar.html">For Sale</a>
+                                <a href="listings-grid-standard-with-sidebar.html">For Rent</a>
+                            </div>
+                        </div>
+
+                        <h3>Houses</h3>
+                        <p>Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim donec vel lectus vel felis.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Car-3"></i>
+                            <div class="icon-links">
+                                <a href="listings-grid-standard-with-sidebar.html">For Sale</a>
+                                <a href="listings-grid-standard-with-sidebar.html">For Rent</a>
+                            </div>
+                        </div>
+
+                        <h3>Garages</h3>
+                        <p>Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim donec vel lectus vel felis.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Icon Box -->
+                    <div class="icon-box-1">
+
+                        <div class="icon-container">
+                            <i class="im im-icon-Clothing-Store"></i>
+                            <div class="icon-links">
+                                <a href="listings-grid-standard-with-sidebar.html">For Sale</a>
+                                <a href="listings-grid-standard-with-sidebar.html">For Rent</a>
+                            </div>
+                        </div>
+
+                        <h3>Commercial</h3>
+                        <p>Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim donec vel lectus vel felis.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Fullwidth Section / End -->
+
+    <!-- Container -->
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-wrap d-flex justify-content-between">
-            <div class="title-box">
-              <h2 class="title-a">Latest Properties</h2>
+        <div class="row">
+
+            <div class="col-md-12">
+                <h3 class="headline centered margin-bottom-35 margin-top-10">Most Popular Places <span>Properties In Most Popular Places</span></h3>
             </div>
-            <div class="title-link">
-              <a href="property-grid.html">All Property
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
+
+            <div class="col-md-4">
+
+                <!-- Image Box -->
+                <a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-01.jpg">
+
+                    <!-- Badge -->
+                    <div class="listing-badges">
+                        <span class="featured">Featured</span>
+                    </div>
+
+                    <div class="img-box-content visible">
+                        <h4>Gurgaon</h4>
+                        <span>14 Properties</span>
+                    </div>
+                </a>
+
             </div>
-          </div>
+
+            <div class="col-md-8">
+
+                <!-- Image Box -->
+                <a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-02.jpg">
+                    <div class="img-box-content visible">
+                        <h4>Faridabad</h4>
+                        <span>24 Properties</span>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="col-md-8">
+
+                <!-- Image Box -->
+                <a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-03.jpg">
+                    <div class="img-box-content visible">
+                        <h4>Karnal</h4>
+                        <span>12 Properties</span>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <!-- Image Box -->
+                <a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/popular-location-04.jpg">
+                    <div class="img-box-content visible">
+                        <h4>Rohtak</h4>
+                        <span>9 Properties</span>
+                    </div>
+                </a>
+
+            </div>
+
         </div>
-      </div>
-
-      <div id="property-carousel" class="owl-carousel owl-theme">
-          {% for property in properties %}
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="img-box-a">
-              <img src="{{ property.image.url }}" alt="" class="img-a img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-overlay-a-content">
-                <div class="card-header-a">
-                  <h2 class="card-title-a">
-                    <a href="property-single.html">
-                      <br /> {{ property.property_name }}</a>
-                  </h2>
-                </div>
-                <div class="card-body-a">
-                  <div class="price-box d-flex">
-                    <span class="price-a">{{ property.get_type_display }} | Rs {{ property.total_price }}</span>
-                  </div>
-                  <a href="#" class="link-a">Click here to view
-                    <span class="ion-ios-arrow-forward"></span>
-                  </a>
-                </div>
-                <div class="card-footer-a">
-                  <ul class="card-info d-flex justify-content-around">
-                    <li>
-                      <h4 class="card-info-title">City</h4>
-                      <span>{{ property.city }}
-                      </span>
-                    </li>
-                    <li>
-                      <h4 class="card-info-title">Beds</h4>
-                      <span>{{ property.bedrooms }}</span>
-                    </li>
-                    <li>
-                      <h4 class="card-info-title">Baths</h4>
-                      <span>{{ property.bathrooms }}</span>
-                    </li>
-                    <li>
-                      <h4 class="card-info-title">{% if property.type == 'R' %}Available From{% else %} Construction Status{% endif %}</h4>
-                      <span>{% if property.type == 'R' %}{{ property.available_from }}{% else %}{{ property.get_construction_status_display }}{% endif %}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-
-
-
-      </div>
     </div>
-  </section>
-  <!--/ Property End /-->
+    <!-- Container / End -->
 
-  <!--/ Agents Star /-->
-  <section class="section-agents section-t8">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="title-wrap d-flex justify-content-between">
-            <div class="title-box">
-              <h2 class="title-a">Best Agents</h2>
+
+    <!-- Fullwidth Section -->
+    <section class="fullwidth margin-top-105 margin-bottom-0 padding-bottom-80 padding-top-95" data-background-color="#f7f7f7">
+
+        <!-- Box Headline -->
+        <h3 class="headline-box">What Our Clients Say</h3>
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="testimonials-subtitle">We collect reviews from our customers so you can get an honest opinion of what an apartment is really like!</div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="testimonial-box">
+                        <div class="testimonial">Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.</div>
+                        <div class="testimonial-author">
+                            <img src="images/happy-client-01.jpg" alt="">
+                            <h4>Saksham<span>Rented Apartment</span></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="testimonial-box">
+                        <div class="testimonial">Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.</div>
+                        <div class="testimonial-author">
+                            <img src="images/happy-client-02.jpg" alt="">
+                            <h4>Mayank<span>Bought House</span></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="testimonial-box">
+                        <div class="testimonial">Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.</div>
+                        <div class="testimonial-author">
+                            <img src="images/happy-client-03.jpg" alt="">
+                            <h4>Rohit<span>Sold Apartment</span></h4>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="title-link">
-              <a href="agents-grid.html">All Agents
-                <span class="ion-ios-arrow-forward"></span>
-              </a>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="img/agent-4.jpg" alt="" class="img-d img-fluid">
-            </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two">Margaret Sotillo
-                      <br> Escala</a>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                </p>
-                <div class="info-agents color-a">
-                  <p>
-                    <strong>Phone: </strong> +54 356 945234</p>
-                  <p>
-                    <strong>Email: </strong> agents@example.com</p>
-                </div>
-              </div>
-              <div class="card-footer-d">
-                <div class="socials-footer d-flex justify-content-center">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="img/agent-1.jpg" alt="" class="img-d img-fluid">
-            </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two">Stiven Spilver
-                      <br> Darw</a>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                </p>
-                <div class="info-agents color-a">
-                  <p>
-                    <strong>Phone: </strong> +54 356 945234</p>
-                  <p>
-                    <strong>Email: </strong> agents@example.com</p>
-                </div>
-              </div>
-              <div class="card-footer-d">
-                <div class="socials-footer d-flex justify-content-center">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-d">
-            <div class="card-img-d">
-              <img src="img/agent-5.jpg" alt="" class="img-d img-fluid">
-            </div>
-            <div class="card-overlay card-overlay-hover">
-              <div class="card-header-d">
-                <div class="card-title-d align-self-center">
-                  <h3 class="title-d">
-                    <a href="agent-single.html" class="link-two">Emma Toledo
-                      <br> Cascada</a>
-                  </h3>
-                </div>
-              </div>
-              <div class="card-body-d">
-                <p class="content-d color-text-a">
-                  Sed porttitor lectus nibh, Cras ultricies ligula sed magna dictum porta two.
-                </p>
-                <div class="info-agents color-a">
-                  <p>
-                    <strong>Phone: </strong> +54 356 945234</p>
-                  <p>
-                    <strong>Email: </strong> agents@example.com</p>
-                </div>
-              </div>
-              <div class="card-footer-d">
-                <div class="socials-footer d-flex justify-content-center">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-pinterest-p" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="list-inline-item">
-                      <a href="#" class="link-one">
-                        <i class="fa fa-dribbble" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!--/ Agents End /-->
+
+    </section>
+    <!-- Fullwidth Section / End -->
+
 {% endblock content %}

@@ -1,10 +1,215 @@
-from django.shortcuts import render
-from . import models
-# Create your views here.
+from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+
+from . import models, forms
+
 def HomeView(request):
     properties = models.property.objects.all()[:4]
-
+    agents = models.agent.objects.all()[:4]
     context = {
-        'properties':properties,
+        'properties': properties,
+        'agents': agents,
     }
     return render(request, 'index.html', context)
+
+def PropertiesView(request):
+    allProperties = models.property.objects.all()
+    search_term = ''
+
+    if 'bedrooms' in request.GET:
+        bedrooms = request.GET['bedrooms']
+        allProperties = allProperties.filter(bedrooms=bedrooms)
+
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+        allProperties = allProperties.filter(property_name__icontains= search_term, additional_features__icontains=search_term)
+
+    paginator = Paginator(allProperties, 25)
+    page = request.GET.get('page')
+    all_posts = paginator.get_page(page)
+
+    get_dict_copy = request.GET.copy()
+    params = get_dict_copy.pop('page', True) and get_dict_copy.urlencode()
+    context = {
+        'properties': allProperties,
+        'params': params,
+        'search_term': search_term
+    }
+    return render(request, 'properties.html', context)
+
+def AgentsView(request):
+    properties = models.property.objects.all()[:4]
+    agents = models.agent.objects.all()[:4]
+    context = {
+        'properties': properties,
+        'agents': agents,
+    }
+    return render(request, 'agents.html', context)
+
+def ContactView(request):
+    if request.method == 'POST':
+        form = forms.contactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                'Message sent Successfully',
+                extra_tags='alert alert-success alert-dismissible fade show'
+            )
+    else:
+        form = forms.contactForm
+        context = {
+            'form':form,
+        }
+        return render(request, 'contact.html', context)
+
+def PropertyView(request, id):
+    property = get_object_or_404(models.property, id = id)
+    property.views += 1
+    property.save()
+    images = models.images.objects.filter(property=property)
+    context = {
+        'property': property,
+        'images': images,
+    }
+    return render(request, 'property.html', context)
+
+@login_required
+def UserProfileView(request):
+    user = ''
+    context = {
+        'user': user,
+    }
+    return render(request, 'dashboard/userprofile.html', context)
+
+@login_required
+def myProperties(request):
+    properties = models.property.objects.filter(owner = request.user)
+    context = {
+        'properties': properties,
+    }
+    return render(request, 'dashboard/myproperties.html', context)
+
+@login_required
+def editProperty(request, id):
+    property = get_object_or_404(models.property, id=id)
+    if property.owner == request.user:
+        if request.method == 'POST':
+            form = forms.propertyForm(request.POST, instance=property)
+            if form.is_valid():
+                form.save()
+                messages.success(
+                    request,
+                    'Property Details Saved Successfully',
+                    extra_tags='alert alert-success alert-dismissible fade show'
+                )
+        else:
+            form = forms.propertyForm(instance=property)
+            context = {
+                'form', form
+            }
+            return render(request, 'dashboard/addproperty.html', context)
+    else:
+        messages.success(
+            request,
+            'You are not allowed to edit the Property Details',
+            extra_tags='alert alert-success alert-dismissible fade show'
+        )
+        return redirect('core:myproperties')
+
+@login_required
+def addProperty(request, id):
+    if request.method == "POST":
+        form = forms.propertyForm(request.POST)
+        if form.is_valid():
+            new_form = form.save(commit = False)
+            new_form.owner = request.user
+            new_form.save()
+            messages.success(
+                            request,
+                            'Property Added Successfully',
+                            extra_tags='alert alert-success alert-dismissible fade show'
+                            )
+            return redirect('core:myproperties')
+    else:
+        form = forms.propertyForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'dashboard/addproperty.html', context)
+
+@login_required
+def deleteProperty(request, id):
+
+    property = get_object_or_404(models.property, id = id )
+    if property.owner == request.user:
+        property.delete()
+        messages.success(
+            request,
+            'Property Deleted Successfully',
+            extra_tags='alert alert-success alert-dismissible fade show'
+        )
+    else:
+        messages.error(
+            request,
+            'You can not delete the property',
+            extra_tags='alert alert-danger alert-dismissible fade show'
+        )
+    return redirect('core:myproperties')
+
+@login_required
+def hideProperty(request, id):
+    property = get_object_or_404(models.property, id=id)
+    if property.owner == request.user:
+        property.visible = False
+        property.save()
+    return redirect('core:myproperties')
+
+@login_required
+def showProperty(request, id):
+    property = get_object_or_404(models.property, id=id)
+    if property.owner == request.user:
+        property.visible = True
+        property.save()
+    return redirect('core:myproperties')
+
+@login_required
+def BookmarkView(request):
+    bookmarks = models.bookmark.objects.filter(user=request.user).first()
+    context = {
+        'bookmark': bookmarks,
+    }
+    return render(request, 'dashboard/bookmarks.html', context)
+
+@login_required
+def add_to_bookmark(request, id):
+    property = get_object_or_404(models.property, id = id)
+    bookmark_qs = models.bookmark.objects.filter(user = request.user)
+    if bookmark_qs.exists():
+        bookmark = bookmark_qs[0]
+        if bookmark.properties.filter(id = id).exists():
+            messages.info(request, "Property Already Bookmarked")
+        else:
+            bookmark.properties.add(property)
+            messages.info(request, "Successfully Bookmarked")
+    else:
+        bookmark = models.bookmark.objects.create(user=request.user)
+        bookmark.properties.add(property)
+        messages.info(request, "Successfully Bookmarked")
+    return redirect("core:bookmarks")
+
+@login_required
+def remove_from_bookmark(request, id):
+    property = get_object_or_404(models.property, id = id)
+    bookmark_qs = models.bookmark.objects.filter(user = request.user)
+    if bookmark_qs.exists():
+        bookmark = bookmark_qs[0]
+        if bookmark.properties.filter(id = id).exists():
+            bookmark.properties.remove(property)
+            messages.info(request, "Property removed from your Bookmarks")
+    else:
+        messages.info(request, "Property does not exist in your Bookmarks")
+    return redirect("core:bookmarks")

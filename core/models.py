@@ -1,5 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
 
+from datetime import datetime
 
 type_choices = (
     ('B', 'Buy'),
@@ -12,8 +15,18 @@ construction_choices = (
     ('UC', 'Under Construction'),
 )
 
-# Create your models here.
+
+class User(AbstractUser):
+    is_agent = models.BooleanField(default=False)
+    mobile = PhoneNumberField(null = True)
+    mobile_verified = models.BooleanField(default=False)
+    profile_pic = models.ImageField(blank = True, null = True)
+
+    def __str__(self):
+        return self.username
+
 class property(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     type = models.CharField(choices=type_choices, max_length=1)
     property_name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
@@ -25,12 +38,29 @@ class property(models.Model):
     total_price = models.FloatField()
     additional_features = models.TextField(blank = True, null = True)
     image = models.ImageField()
+    visible = models.BooleanField(default=True)
+    views = models.IntegerField(default=0)
+    #label = models.Charfield(max_length = 10)
+    #dateadded = models.DateField(auto_now_add=True)
+    #rooms = models.IntegerField()
+    # features = models.ManyToManyField(features)
+    # category = models.CharField(max_length=2, choices=)
 
     def __str__(self):
         return self.property_name
 
     class Meta:
         verbose_name_plural = 'Properties'
+
+    # def get_label(self):
+    #     if self.label:
+    #         return self.label
+    #     else:
+    #         return None
+
+class features(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=200, blank=True, null=True)
 
 class images(models.Model):
     image = models.ImageField()
@@ -51,3 +81,26 @@ class videos(models.Model):
 
     class Meta:
         verbose_name_plural = 'Videos'
+
+class agent(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    mobile = PhoneNumberField()
+    email = models.CharField(max_length=50)
+    image = models.ImageField()
+
+class bookmark(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    properties = models.ManyToManyField(property)
+
+    def __str__(self):
+        return self.user.username
+
+class contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

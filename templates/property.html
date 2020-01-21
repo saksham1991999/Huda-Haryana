@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{%  load static %}
+
+{% block content %}
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="property-titlebar margin-bottom-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<a href="{% url 'core:properties' %}" class="back-to-listings"></a>
+				<div class="property-title">
+					<h2>{{ property.property_name }} <span class="property-badge">{{ property.get_type_display }}</span></h2>
+					<span>
+						<a href="#location" class="listing-address">
+							<i class="fa fa-map-marker"></i>
+							{{ property.city }}
+						</a>
+					</span>
+				</div>
+
+				<div class="property-pricing">
+					<div class="property-price">₹ {{ property.total_price }}</div>
+					{% if property.price_sq %}
+                    <div class="sub-price">₹ {{ property.price_sq }} / sq ft</div>
+                    {% endif %}
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Content
+================================================== -->
+<div class="container">
+	<div class="row margin-bottom-50">
+		<div class="col-md-12">
+
+			<!-- Slider -->
+			<div class="property-slider default">
+                {% for image in images %}
+				<a href="{{ image.image.url }}" data-background-image="images/single-property-01.jpg" class="item mfp-gallery"></a>
+			    {% endfor %}
+            </div>
+
+			<!-- Slider Thumbs -->
+			<div class="property-slider-nav">
+                {% for image in images %}
+				<div class="item"><img src="{{ image.image.url }}" alt=""></div>
+			    {% endfor %}
+
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+
+		<!-- Property Description -->
+		<div class="col-lg-8 col-md-7 sp-content">
+			<div class="property-description">
+
+				<!-- Main Features -->
+				<ul class="property-main-features">
+                    <li>Area <span>1450 sq ft</span></li>
+                    {%  if property.construction_status %}
+					<li>Construction Status <span>{{ property.get_construction_status_display }}</span></li>
+                    {% endif %}
+                    {%  if property.available_from %}
+					<li>Available From <span>{{ property.available_from }}</span></li>
+                    {% endif %}
+					<li>Rooms <span>4</span></li>
+					<li>Bedrooms <span>{{ property.bedrooms }}</span></li>
+					<li>Bathrooms <span>{{ property.bathrooms }}</span></li>
+				</ul>
+
+                {% if property.additional_features %}
+				<!-- Description -->
+				<h3 class="desc-headline">Description</h3>
+				<div class="show-more">
+					<p>
+						{{ property.additional_features }}
+					</p>
+					<a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
+				</div>
+                {% endif %}
+
+            {% comment %}
+				<!-- Details -->
+				<h3 class="desc-headline">Details</h3>
+				<ul class="property-features margin-top-0">
+					<li>Building Age: <span>2 Years</span></li>
+					<li>Parking: <span>Attached Garage</span></li>
+					<li>Cooling: <span>Central Cooling</span></li>
+					<li>Heating: <span>Forced Air, Gas</span></li>
+					<li>Sewer: <span>Public/City</span></li>
+					<li>Water: <span>City</span></li>
+					<li>Exercise Room: <span>Yes</span></li>
+					<li>Storage Room: <span>Yes</span></li>
+				</ul>
+            {% endcomment %}
+
+                {% comment %}
+                {% if property.features %}
+				<!-- Features -->
+				<h3 class="desc-headline">Features</h3>
+				<ul class="property-features checkboxes margin-top-0">
+                {% for feature in property.features %}
+					<li>{{ feature.title }}</li>
+                {% endif %}
+				</ul>
+                {% endif %}
+                {% endcomment %}
+
+                {% with property.videos_set.all|first as video %}
+                {% if video %}
+				<!-- Video -->
+				<h3 class="desc-headline no-border">Video</h3>
+				<div class="responsive-iframe">
+                    <video width="560" height="315" controls>
+                        <source src="{{ video.url }}" type="video/mp4">
+                    </video>
+					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UPBJKppEXoQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+				</div>
+                {% endif %}
+                {% endwith %}
+
+                {% comment %}
+				<!-- Location -->
+				<h3 class="desc-headline no-border" id="location">Location</h3>
+				<div id="propertyMap-container">
+					<div id="propertyMap" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
+					<a href="#" id="streetView">Street View</a>
+				</div>
+				{% endcomment %}
+
+			</div>
+		</div>
+		<!-- Property Description / End -->
+
+
+		<!-- Sidebar -->
+		<div class="col-lg-4 col-md-5 sp-sidebar">
+			<div class="sidebar sticky right">
+
+				<!-- Widget -->
+				<div class="widget margin-bottom-30">
+					<!--<button class="widget-button with-tip" data-tip-content="Print"><i class="sl sl-icon-printer"></i></button>
+					<button class="widget-button with-tip compare-widget-button" data-tip-content="Add to Compare"><i class="icon-compare"></i></button>
+					-->
+                    <a href="{% url 'core:addtobookmarks' property.id %}"><button class="widget-button with-tip" data-tip-content="Add to Bookmarks"><i class="fa fa-star-o"></i></button></a>
+
+					<div class="clearfix"></div>
+				</div>
+				<!-- Widget / End -->
+
+				<!-- Widget -->
+				<div class="widget">
+
+					<!-- Agent Widget -->
+					<div class="agent-widget">
+						<div class="agent-title">
+                        <!--
+							<div class="agent-photo"><img src="images/agent-avatar.jpg" alt="" /></div>
+							-->
+							<div class="agent-details">
+                                {% if property.owner.first_name %}
+                                    <h4>{{ property.owner.first_name }} {{ property.owner.last_name }}</h4>
+                                {% else %}
+								<h4><a href="#">{{ property.owner.username }}</a></h4>
+                                {% endif %}
+                            {% if property.owner.mobile %}
+								<span><i class="sl sl-icon-call-in"></i>{{ property.owner.mobile }}</span>
+                            {% endif %}
+							</div>
+							<div class="clearfix"></div>
+						</div>
+
+						<input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
+						<input type="text" placeholder="Your Phone">
+						<textarea></textarea>
+						<button class="button fullwidth margin-top-5">Send Message</button>
+					</div>
+					<!-- Agent Widget / End -->
+
+				</div>
+				<!-- Widget / End -->
+
+			</div>
+		</div>
+		<!-- Sidebar / End -->
+
+	</div>
+</div>
+
+{% endblock content %}

@@ -10,25 +10,17 @@
     <meta content="" name="description">
     
     <!-- Favicon -->   
-    <link href="{% static 'img/logo.png' %}" rel="shortcut icon"/>
+    <link href="{% static 'images/logo.png' %}" rel="shortcut icon"/>
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-    <!-- Bootstrap CSS File -->
-    <link href="{% static 'lib/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-
-    <!-- Libraries CSS Files -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-    <link href="{% static 'lib/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
-    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
-    <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
-    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-
-
-    <!-- Main Stylesheet File -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/color.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/icons.css'%}">
 
 	{% block extra_stylesheet %}
 	{% endblock extra_stylesheet %}
@@ -37,7 +29,6 @@
 
 
 <body>
-    {% include 'formsearch.html' %}
 	{% include "navbar.html" %}
 
     {% comment %}
@@ -57,15 +48,17 @@
     <!-- EndMessages --> 
 
     {% endcomment %}
-
+    <!-- Wrapper -->
+    <div id="wrapper">
     {% block content %}
     {% endblock content %}
     </div>
-  
     {% block extra_body %}
-    {% endblock %}
+    {% endblock extra_body %}
   
     {% include "footer.html" %}
+    <!-- Back To Top Button -->
+    <div id="backtotop"><a href="#"></a></div>
     {% include "scripts.html" %}
   
     {% block extra_scripts %}
