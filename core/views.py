@@ -63,7 +63,12 @@ def ContactView(request):
                 'Message sent Successfully',
                 extra_tags='alert alert-success alert-dismissible fade show'
             )
-        return redirect('core:contact')
+            print('_______________________FORM WAS VALID _____________________')
+            return redirect('core:home')
+        else:
+            print(form.errors)
+            print('_______________________FORM WAS INVALID _____________________')
+            return redirect('core:contact')
     else:
         form = forms.contactForm
         context = {

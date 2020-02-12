@@ -33,24 +33,22 @@
     <div id="wrapper" class="mm-page mm-slideout">
 	{% include "navbar.html" %}
 
-    {% comment %}
+
     <!-- Messages -->   
 	{% if messages %}
 	<div class="">
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+
+            <div class="notification {{ message.tags }} closeable">
+				<p>{{ message }}</p>
+				<a class="close"></a>
+			</div>
+
         {% endfor %}
     </div>
 	{% endif %}
     <!-- EndMessages --> 
 
-    {% endcomment %}
-    <!-- Wrapper -->
 
     {% block content %}
     {% endblock content %}

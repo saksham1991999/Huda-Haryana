@@ -38,7 +38,7 @@
 
 				<div id="contact-message"></div>
 
-					<form method="post" name="contactform" id="contactform" autocomplete="on">
+					<form method="post" action="" class="form-a contactForm" autocomplete="on">
                     {% csrf_token %}
 
 					<div class="row">
@@ -49,7 +49,7 @@
                         </div>
                         {% endfor %}
 					<button class="button margin-top-20 margin-bottom-20" type = "submit">Send</button>
-
+                    </div>
 					</form>
 			</section>
 		</div>
