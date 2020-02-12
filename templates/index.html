@@ -21,39 +21,31 @@
                         <!-- Row With Forms -->
                         <div class="row with-forms">
 
-                            <!-- Property Type -->
-                            <div class="col-md-3">
-                                <select data-placeholder="Any Type" class="chosen-select-no-single" >
-                                    <option>Apartments</option>
-                                    <option>Houses</option>
-                                    <option>Commercial</option>
-                                    <option>Garages</option>
-                                    <option>Lots</option>
-                                </select>
-                            </div>
+                            <form action="{% url 'core:properties' %}">
 
-                            <!-- Status -->
-                            <div class="col-md-3">
-                                <select data-placeholder="Any Status" class="chosen-select-no-single" >
-                                    <option>For Sale</option>
-                                    <option>For Rent</option>
-                                </select>
-                            </div>
+                             <div class="col-md-4">
 
+                                    <div class="main-search-input">
+                                        <input type="search" placeholder="Enter city" aria-label="City" name='city' value="{{ city }}" id = "city" />
+                                    </div>
+                            </div>
                             <!-- Main Search Input -->
-                            <div class="col-md-6">
-                                <div class="main-search-input">
-                                    <input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
-                                    <button class="button"><i class="fa fa-search"></i></button>
-                                </div>
+                            <div class="col-md-8">
+
+                                    <div class="main-search-input">
+                                        <input type="search" placeholder="Search Using a Key Word" aria-label="Search" name='search' value="{{search_term}}"  />
+                                        <button type = "submit" class="button"><i class="fa fa-search"></i></button>
+                                    </div>
+                            </div>
+                                </form>
                             </div>
 
-                        </div>
+
                         <!-- Row With Forms / End -->
 
                         <!-- Browse Jobs -->
                         <div class="adv-search-btn">
-                            Need more search options? <a href="listings-list-full-width.html">Advanced Search</a>
+                            Need more search options? <a href="{% url 'core:properties' %}">Advanced Search</a>
                         </div>
 
                         <!-- Announce -->

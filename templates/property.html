@@ -153,12 +153,12 @@
 
 				<!-- Widget -->
 				<div class="widget margin-bottom-30">
-					<!--<button class="widget-button with-tip" data-tip-content="Print"><i class="sl sl-icon-printer"></i></button>
-					<button class="widget-button with-tip compare-widget-button" data-tip-content="Add to Compare"><i class="icon-compare"></i></button>
-					-->
-                    <a href="{% url 'core:addtobookmarks' property.id %}"><button class="widget-button with-tip" data-tip-content="Add to Bookmarks"><i class="fa fa-star-o"></i></button></a>
+                    <a href="{% url 'core:addtobookmarks' %}" class="button medium border"><i class="fa fa-star-o"></i>Bookmark</a>
+                    <a href="{% url 'core:removefrombookmarks' %}" class="button medium">Remove from Bookmarks</a>
 
-					<div class="clearfix"></div>
+                    <a href="{% url 'core:addtocompare' %}" class="button medium border"><i class="icon-compare">Compare</i></a>
+                    <a href="{% url 'core:removefromcompare' %}" class="button medium">Remove from Compare List</a>
+
 				</div>
 				<!-- Widget / End -->
 

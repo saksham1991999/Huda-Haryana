@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from phonenumber_field.modelfields import PhoneNumberField
 
 from datetime import datetime
 
@@ -18,7 +17,7 @@ construction_choices = (
 
 class User(AbstractUser):
     is_agent = models.BooleanField(default=False)
-    mobile = PhoneNumberField(null = True)
+    mobile = models.CharField(max_length=10)
     mobile_verified = models.BooleanField(default=False)
     profile_pic = models.ImageField(blank = True, null = True)
 
@@ -90,7 +89,7 @@ class videos(models.Model):
 class agent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    mobile = PhoneNumberField()
+    mobile = models.CharField(max_length=10)
     email = models.CharField(max_length=50)
     image = models.ImageField()
 
