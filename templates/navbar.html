@@ -1,11 +1,14 @@
 {% load static %}
 
+<!-- Wrapper -->
+<div id="wrapper" class="mm-page mm-slideout">
+
 <!-- Header Container
 ================================================== -->
 <header id="header-container" class="header-style-2">
 
 	<!-- Header -->
-	<div id="header">
+	<div id="header" class="">
 		<div class="container">
 
 			<!-- Left Side Content -->
@@ -14,10 +17,7 @@
 				<!-- Logo -->
 				<div id="logo" class="margin-top-10">
 					<a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""></a>
-
-					<!-- Logo for Sticky Header -->
-					<a href="index.html" class="sticky-logo"><img src="{% static 'images/logo2.png' %}" alt=""></a>
-				</div>
+                </div>
 
 				<!-- Mobile Navigation -->
 				<div class="mmenu-trigger">
@@ -31,10 +31,10 @@
 			</div>
 			<!-- Left Side Content / End -->
 
-			<!-- Right Side Content / End -->
+            <!-- Right Side Content / End -->
 			<div class="right-side">
 				<ul class="header-widget">
-					<!--
+                    <!--
 					<li>
 						<i class="sl sl-icon-call-in"></i>
 						<div class="widget-content">
@@ -50,10 +50,10 @@
 							<span class="data">45 Park Avenue, NY</span>
 						</div>
 					</li>
-					-->
-					<li class="with-btn"><a href="{% url 'core:addproperty' %}" class="button border">Submit Property</a></li>
-				</ul>
-			</div>
+                    -->
+					<li class="with-btn"><a href="{% url 'core:addproperty' %}" class="button border">Submit Property</a></li>				</ul>
+                </ul>
+            </div>
 			<!-- Right Side Content / End -->
 
 		</div>
@@ -85,51 +85,75 @@
 								</li>
 							</ul>
 						</li>
+
 						<li><a href="{% url 'core:agents' %}" {% if request.resolver_match.view_name == 'core:agents' %}class="current"{% endif %}>Agents</a>
 						</li>
 						<li><a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
 						</li>
-
-
-
- 						<li class="right-side-menu-item">
- 							{% if request.user.is_authenticated %}
-                            <a href="{% url 'core:userprofile' %}" class="sign-in">
-                            {% comment %}
-                                <span><img src="images/agent-03.jpg" alt=""></span>{% endcomment %} Hi {{ request.user.username }},</a>
-                            	
-								<ul>
-									<li><a href="{% url 'core:userprofile' %}"><i class="sl sl-icon-user"></i> My Profile</a></li>
-									<li><a href="{% url 'core:bookmarks' %}"><i class="sl sl-icon-star"></i> Bookmarks</a></li>
-									<li><a href="{% url 'core:myproperties' %}"><i class="sl sl-icon-docs"></i> My Properties</a></li>
-									<li><a href="{% url 'account_logout' %}"><i class="sl sl-icon-power"></i> Log Out</a></li>
-								</ul>
-							
-							{% else %}
-	                            <a href="{% url 'account_login' %}" class="sign-in"><i class="sl sl-icon-user"></i>Sign-in</a>
-							{% endif %}
-						</li>
-
+<!-- 						<li class="right-side-menu-item"><a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a></li> -->
 					</ul>
 			</div>
 		</nav>
 
-		<!-- User Menu --><!--
+        <nav id="navigation" class="style-2 cloned unsticky">
+			<div class="container">
+					<ul id="responsive"><a href="{% url 'core:home' %}" class="sticky-logo"><img src="{% static 'images/logo2.png' %}" alt=""></a>
+
+						<li><a href="{% url 'core:home' %}" {% if request.resolver_match.view_name == 'core:home' %}class="current"{% endif %}>Home</a>
+							<ul>
+								<li><a href="index.html">About</a></li>
+								<li><a href="index-2.html">Services</a></li>
+								<li><a href="index-3.html">Search</a></li>
+							</ul>
+						</li>
+
+						<li><a href="{% url 'core:properties' %}" {% if request.resolver_match.view_name == 'core:properties' %}class="current"{% endif %}>Properties</a>
+							<ul>
+								<li><a href="#">For Rent</a>
+									<!--
+									<ul>
+										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
+										<li><a href="listings-list-with-map.html">With Map</a></li>
+										<li><a href="listings-list-full-width.html">Full Width</a></li>
+									</ul>-->
+								</li>
+								<li><a href="#">For Sale</a>
+								</li>
+							</ul>
+						</li>
+
+                        <li>
+                            <a href="{% url 'core:agents' %}" {% if request.resolver_match.view_name == 'core:agents' %}class="current"{% endif %}>Agents</a>
+						</li>
+						<li>
+                            <a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
+						</li>
+<!-- 						<li class="right-side-menu-item"><a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a></li> -->
+					</ul>
+			</div>
+		</nav>
+
+		<!-- User Menu -->
 		<div class="container">
 			<div class="row">
 				<div class="user-menu-container">
 					<div class="user-menu">
-						<div id="responsive" class="user-name"><span><img src="images/agent-03.jpg" alt=""></span>Hi, John!</div>
-						<ul>
-							<li><a href="my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-							<li><a href="my-bookmarks.html"><i class="sl sl-icon-star"></i> Bookmarks</a></li>
-							<li><a href="my-properties.html"><i class="sl sl-icon-docs"></i> My Properties</a></li>
-							<li><a href="index.html"><i class="sl sl-icon-power"></i> Log Out</a></li>
-						</ul>
+                        {% if request.user.is_authenticated %}
+                            <div class="user-name">Hi {{ request.user.username }},</div>
+                            <ul>
+                                <li><a href="{% url 'core:userprofile' %}"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                                <li><a href="{% url 'core:bookmarks' %}"><i class="sl sl-icon-star"></i> Bookmarks</a></li>
+                                <li><a href="{% url 'core:myproperties' %}"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+                                <li><a href="{% url 'account_logout' %}"><i class="sl sl-icon-power"></i> Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <a href="{% url 'account_login' %}"><div class="user-name">
+                            Sign-in</div></a>
+                        {% endif %}
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
 		<!-- User Menu / End -->
 
 		<div class="clearfix"></div>
@@ -140,3 +164,57 @@
 </header>
 <div class="clearfix"></div>
 <!-- Header Container / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="{%  static 'scripts/chosen.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/custom.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/daterangepicker.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/dropzone.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/gmaps_api_v3.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/hoverIntent.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/infobox.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/jquery.counterup.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/jquery.jpanelmenu.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/jquery-2.2.0.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/jquery-3.4.1.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/jquery-migrate-3.1.0.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/magnific-popup.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/maps.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/markerclusterer.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/masonry.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/mmenu.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/moment.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/quantityButtons.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/rangeSlider.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/slick.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/sticky-kit.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/switcher.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/tooltips.min.js' %}"></script>
+<script type="text/javascript" src="{%  static 'scripts/waypoints.min.js' %}"></script>
+
+
+<div id="mm-blocker" class="mm-slideout"></div>
+
+<div id="tiptip_holder" style="max-width:200px;">
+    <div id="tiptip_arrow">
+        <div id="tiptip_arrow_inner">
+        </div>
+    </div>
+    <div id="tiptip_content"></div></div>
+
+
+
+
+
+
+
+
+
+

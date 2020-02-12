@@ -25,6 +25,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
+class features(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.CharField(max_length=200, blank=True, null=True)
+
 class property(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     type = models.CharField(choices=type_choices, max_length=1)
@@ -39,12 +43,12 @@ class property(models.Model):
     additional_features = models.TextField(blank = True, null = True)
     image = models.ImageField()
     visible = models.BooleanField(default=True)
+    verified = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
-    #label = models.Charfield(max_length = 10)
-    #dateadded = models.DateField(auto_now_add=True)
-    #rooms = models.IntegerField()
-    # features = models.ManyToManyField(features)
-    # category = models.CharField(max_length=2, choices=)
+    label = models.CharField(max_length = 10, null=True, blank=True)
+    dateadded = models.DateField(auto_now_add=True)
+    rooms = models.IntegerField()
+    features = models.ManyToManyField(features)
 
     def __str__(self):
         return self.property_name
@@ -58,9 +62,7 @@ class property(models.Model):
     #     else:
     #         return None
 
-class features(models.Model):
-    title = models.CharField(max_length=50)
-    description = models.CharField(max_length=200, blank=True, null=True)
+
 
 class images(models.Model):
     image = models.ImageField()
@@ -89,6 +91,17 @@ class agent(models.Model):
     email = models.CharField(max_length=50)
     image = models.ImageField()
 
+class Compare(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    propeerties = models.ManyToManyField(property)
+
+    def get_properties(self):
+        properties_compare = self.propeerties.all()[:4]
+        return properties_compare
+
+    def __str__(self):
+        return self.user.username
+
 class bookmark(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     properties = models.ManyToManyField(property)
@@ -104,3 +117,4 @@ class contact(models.Model):
 
     def __str__(self):
         return self.name
+

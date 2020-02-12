@@ -5,13 +5,7 @@ from . import models
 class propertyForm(forms.ModelForm):
     class Meta:
         model = models.property
-        fields = [
-        'type', 'property_name', 'city' , 'bedrooms', 'bathrooms', 'construction_status','available_from',
-        'price_sq',
-        'total_price',
-        'additional_features',
-        'image'
-        ]
+        exclude = ['verified', 'views', 'owner', 'visible']
 
 class contactForm(forms.ModelForm):
     class Meta:
@@ -22,3 +16,8 @@ class contactForm(forms.ModelForm):
             'subject',
             'message',
         ]
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = ['first_name', 'last_name']

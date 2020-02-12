@@ -5,7 +5,8 @@
 <head>
 	<title>Huda Haryana</title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     <meta content="" name="keywords">
     <meta content="" name="description">
     
@@ -29,6 +30,7 @@
 
 
 <body>
+    <div id="wrapper" class="mm-page mm-slideout">
 	{% include "navbar.html" %}
 
     {% comment %}
@@ -49,16 +51,19 @@
 
     {% endcomment %}
     <!-- Wrapper -->
-    <div id="wrapper">
+
     {% block content %}
     {% endblock content %}
-    </div>
+
     {% block extra_body %}
     {% endblock extra_body %}
   
     {% include "footer.html" %}
     <!-- Back To Top Button -->
     <div id="backtotop"><a href="#"></a></div>
+
+        </div>
+    <!-- Wrapper -->
     {% include "scripts.html" %}
   
     {% block extra_scripts %}

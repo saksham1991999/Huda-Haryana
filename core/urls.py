@@ -19,8 +19,8 @@ urlpatterns = [
     path('add-to-bookmarks/<int:id>', views.add_to_bookmark, name='addtobookmarks'),
     path('remove-from-bookmarks/<int:id>', views.remove_from_bookmark, name='removefrombookmarks'),
 
-    path('addproperty', views.myProperties, name='addproperty'),
-    path('editproperty/<int:id>', views.myProperties, name='editproperty'),
-    path('deleteproperty/<int:id>', views.myProperties, name='deleteproperty'),
+    path('addproperty', views.addProperty, name='addproperty'),
+    path('editproperty/<int:id>', views.editProperty, name='editproperty'),
+    path('deleteproperty/<int:id>', views.deleteProperty, name='deleteproperty'),
 
 ]

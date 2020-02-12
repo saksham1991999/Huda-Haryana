@@ -8,16 +8,15 @@ from . import models, forms
 
 def HomeView(request):
     properties = models.property.objects.all()[:4]
-    agents = models.agent.objects.all()[:4]
     context = {
         'properties': properties,
-        'agents': agents,
     }
     return render(request, 'index.html', context)
 
 def PropertiesView(request):
     allProperties = models.property.objects.all()
     search_term = ''
+    city = ''
 
     if 'bedrooms' in request.GET:
         bedrooms = request.GET['bedrooms']
@@ -27,16 +26,21 @@ def PropertiesView(request):
         search_term = request.GET['search']
         allProperties = allProperties.filter(property_name__icontains= search_term, additional_features__icontains=search_term)
 
+    if 'city' in request.GET:
+        city = request.GET['city']
+        allProperties = allProperties.filter(city__icontains=city)
+
     paginator = Paginator(allProperties, 25)
     page = request.GET.get('page')
-    all_posts = paginator.get_page(page)
+    allProperties = paginator.get_page(page)
 
     get_dict_copy = request.GET.copy()
     params = get_dict_copy.pop('page', True) and get_dict_copy.urlencode()
     context = {
         'properties': allProperties,
         'params': params,
-        'search_term': search_term
+        'search_term': search_term,
+        'city': city,
     }
     return render(request, 'properties.html', context)
 
@@ -59,6 +63,7 @@ def ContactView(request):
                 'Message sent Successfully',
                 extra_tags='alert alert-success alert-dismissible fade show'
             )
+        return redirect('core:contact')
     else:
         form = forms.contactForm
         context = {
@@ -68,7 +73,7 @@ def ContactView(request):
 
 def PropertyView(request, id):
     property = get_object_or_404(models.property, id = id)
-    property.views += 1
+    property.views = int(property.views+1)
     property.save()
     images = models.images.objects.filter(property=property)
     context = {
@@ -79,11 +84,22 @@ def PropertyView(request, id):
 
 @login_required
 def UserProfileView(request):
-    user = ''
-    context = {
-        'user': user,
-    }
-    return render(request, 'dashboard/userprofile.html', context)
+    if request.method == "POST":
+        form = forms.UserProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                'Changes Saved Successfully',
+                extra_tags='alert alert-success alert-dismissible fade show'
+            )
+        return redirect('core:userprofile')
+    else:
+        form = forms.UserProfileForm(instance=request.user)
+        context = {
+            'form': form,
+        }
+        return render(request, 'dashboard/userprofile.html', context)
 
 @login_required
 def myProperties(request):
@@ -106,10 +122,13 @@ def editProperty(request, id):
                     'Property Details Saved Successfully',
                     extra_tags='alert alert-success alert-dismissible fade show'
                 )
+                return redirect('core:myproperties')
+            else:
+                return redirect('core:myproperties')
         else:
             form = forms.propertyForm(instance=property)
             context = {
-                'form', form
+                'form': form,
             }
             return render(request, 'dashboard/addproperty.html', context)
     else:
@@ -121,9 +140,9 @@ def editProperty(request, id):
         return redirect('core:myproperties')
 
 @login_required
-def addProperty(request, id):
+def addProperty(request):
     if request.method == "POST":
-        form = forms.propertyForm(request.POST)
+        form = forms.propertyForm(request.POST, request.FILES)
         if form.is_valid():
             new_form = form.save(commit = False)
             new_form.owner = request.user
@@ -209,6 +228,44 @@ def remove_from_bookmark(request, id):
         bookmark = bookmark_qs[0]
         if bookmark.properties.filter(id = id).exists():
             bookmark.properties.remove(property)
+            messages.info(request, "Property removed from your Bookmarks")
+    else:
+        messages.info(request, "Property does not exist in your Bookmarks")
+    return redirect("core:bookmarks")
+
+@login_required
+def ComparisonView(request):
+    properties = models.Compare.objects.all()[:3]
+    context = {
+        'properties': properties,
+    }
+    return render(request, 'comparelibraries.html', context)
+
+@login_required
+def add_to_compare(request, id):
+    property = get_object_or_404(models.property, id = id)
+    compare_qs = models.Compare.objects.filter(user = request.user)
+    if compare_qs.exists():
+        compare = compare_qs[0]
+        if compare.properties.filter(id = id).exists():
+            messages.info(request, "Library Already Bookmarked")
+        else:
+            compare.propeerties.add(property)
+            messages.info(request, "Successfully Added to Compare")
+    else:
+        compare = models.bookmark.objects.create(user=request.user)
+        compare.properties.add(property)
+        messages.info(request, "Successfully Added to Compare")
+    return redirect("core:compare")
+
+@login_required
+def remove_from_compare(request, id):
+    property = get_object_or_404(models.property, id = id)
+    compare_qs = models.Compare.objects.filter(user = request.user)
+    if compare_qs.exists():
+        compare = compare_qs[0]
+        if compare.libraries.filter(id = id).exists():
+            compare.libraries.remove(property)
             messages.info(request, "Property removed from your Bookmarks")
     else:
         messages.info(request, "Property does not exist in your Bookmarks")
