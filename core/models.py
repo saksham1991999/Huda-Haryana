@@ -29,6 +29,9 @@ class features(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200, blank=True, null=True)
 
+    def __str__(self):
+        return self.title.capitalize()
+
 class property(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     type = models.CharField(choices=type_choices, max_length=1)
@@ -93,7 +96,7 @@ class agent(models.Model):
 
 class Compare(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    propeerties = models.ManyToManyField(property)
+    properties = models.ManyToManyField(property)
 
     def get_properties(self):
         properties_compare = self.propeerties.all()[:4]

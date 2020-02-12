@@ -235,11 +235,39 @@ def remove_from_bookmark(request, id):
 
 @login_required
 def ComparisonView(request):
-    properties = models.Compare.objects.all()[:3]
-    context = {
-        'properties': properties,
-    }
-    return render(request, 'comparelibraries.html', context)
+    compare_qs = models.Compare.objects.filter(user=request.user)
+    if compare_qs.exists():
+        compare_qs = compare_qs[0]
+        properties = compare_qs.properties.all()
+        if len(properties):
+            property1 = None
+            property2 = None
+            property3 = None
+            try:
+                property1 = properties[0]
+            except:
+                pass
+            try:
+                property2 = properties[1]
+            except:
+                pass
+            try:
+                property3 = properties[2]
+            except:
+                pass
+
+            features = models.features.objects.all()
+            context = {
+                'properties': properties,
+                'property1':property1,
+                'property2':property2,
+                'property3':property3,
+                'features':features,
+            }
+            return render(request, 'dashboard/compareproperties.html', context)
+    else:
+        messages.info(request, "Add to Properties to Compare list to compare")
+        return redirect('core:properties')
 
 @login_required
 def add_to_compare(request, id):
@@ -248,9 +276,9 @@ def add_to_compare(request, id):
     if compare_qs.exists():
         compare = compare_qs[0]
         if compare.properties.filter(id = id).exists():
-            messages.info(request, "Library Already Bookmarked")
+            messages.info(request, "Property Already Added to Compare List")
         else:
-            compare.propeerties.add(property)
+            compare.properties.add(property)
             messages.info(request, "Successfully Added to Compare")
     else:
         compare = models.bookmark.objects.create(user=request.user)
@@ -264,9 +292,9 @@ def remove_from_compare(request, id):
     compare_qs = models.Compare.objects.filter(user = request.user)
     if compare_qs.exists():
         compare = compare_qs[0]
-        if compare.libraries.filter(id = id).exists():
-            compare.libraries.remove(property)
-            messages.info(request, "Property removed from your Bookmarks")
+        if compare.properties.filter(id = id).exists():
+            compare.properties.remove(property)
+            messages.info(request, "Property removed from your Compare List")
     else:
-        messages.info(request, "Property does not exist in your Bookmarks")
-    return redirect("core:bookmarks")
+        messages.info(request, "Property does not exist in your Compare List")
+    return redirect("core:compare")

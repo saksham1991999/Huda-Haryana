@@ -23,4 +23,7 @@ urlpatterns = [
     path('editproperty/<int:id>', views.editProperty, name='editproperty'),
     path('deleteproperty/<int:id>', views.deleteProperty, name='deleteproperty'),
 
+    path('compare-properties', views.ComparisonView, name='compare'),
+    path('add-to-compare/<int:id>', views.add_to_compare, name='addtocompare'),
+    path('remove-from-compare/<int:id>', views.remove_from_compare, name='removefromcompare'),
 ]

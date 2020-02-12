@@ -39,6 +39,14 @@ class post(models.Model):
             return short_content
         return self.content
 
+
+    def get_shortest_content(self):
+        if len(self.content) > 200:
+            short_content = self.content[:200]
+            short_content += "..."
+            return short_content
+        return self.content
+
     def count_likes(self):
         count = like.objects.filter(post = self).count()
         return count
