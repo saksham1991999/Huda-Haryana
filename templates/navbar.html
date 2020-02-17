@@ -16,7 +16,7 @@
 
 				<!-- Logo -->
 				<div id="logo" class="margin-top-10">
-					<a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""></a>
+					<a href="{% url 'core:home' %}"><img src="{% static 'images/logo.png' %}" alt=""></a>
                 </div>
 
 				<!-- Mobile Navigation -->
@@ -64,31 +64,28 @@
 					<ul id="responsive">
 
 						<li><a href="{% url 'core:home' %}" {% if request.resolver_match.view_name == 'core:home' %}class="current"{% endif %}>Home</a>
-							<ul>
-								<li><a href="index.html">About</a></li>
-								<li><a href="index-2.html">Services</a></li>
-								<li><a href="index-3.html">Search</a></li>
-							</ul>
 						</li>
 
 						<li><a href="{% url 'core:properties' %}" {% if request.resolver_match.view_name == 'core:properties' %}class="current"{% endif %}>Properties</a>
-							<ul>
+							<!--<ul>
 								<li><a href="#">For Rent</a>
-									<!--
+
 									<ul>
 										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
 										<li><a href="listings-list-with-map.html">With Map</a></li>
 										<li><a href="listings-list-full-width.html">Full Width</a></li>
-									</ul>-->
+									</ul>
 								</li>
 								<li><a href="#">For Sale</a>
 								</li>
-							</ul>
+							</ul>-->
 						</li>
 
-						<li><a href="{% url 'core:agents' %}" {% if request.resolver_match.view_name == 'core:agents' %}class="current"{% endif %}>Agents</a>
-						</li>
+
 						<li><a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
+						</li>
+						<li>
+                            <a href="{% url 'core:compare' %}" {% if request.resolver_match.view_name == 'core:compare' %}class="current"{% endif %}>Compare</a>
 						</li>
 <!-- 						<li class="right-side-menu-item"><a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a></li> -->
 					</ul>
@@ -100,33 +97,28 @@
 					<ul id="responsive"><a href="{% url 'core:home' %}" class="sticky-logo"><img src="{% static 'images/logo2.png' %}" alt=""></a>
 
 						<li><a href="{% url 'core:home' %}" {% if request.resolver_match.view_name == 'core:home' %}class="current"{% endif %}>Home</a>
-							<ul>
-								<li><a href="index.html">About</a></li>
-								<li><a href="index-2.html">Services</a></li>
-								<li><a href="index-3.html">Search</a></li>
-							</ul>
 						</li>
 
 						<li><a href="{% url 'core:properties' %}" {% if request.resolver_match.view_name == 'core:properties' %}class="current"{% endif %}>Properties</a>
-							<ul>
+							<!--<ul>
 								<li><a href="#">For Rent</a>
-									<!--
+
 									<ul>
 										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
 										<li><a href="listings-list-with-map.html">With Map</a></li>
 										<li><a href="listings-list-full-width.html">Full Width</a></li>
-									</ul>-->
+									</ul>
 								</li>
 								<li><a href="#">For Sale</a>
 								</li>
-							</ul>
+							</ul>-->
 						</li>
 
-                        <li>
-                            <a href="{% url 'core:agents' %}" {% if request.resolver_match.view_name == 'core:agents' %}class="current"{% endif %}>Agents</a>
-						</li>
 						<li>
                             <a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
+						</li>
+						<li>
+                            <a href="{% url 'core:compare' %}" {% if request.resolver_match.view_name == 'core:compare' %}class="current"{% endif %}>Compare</a>
 						</li>
 <!-- 						<li class="right-side-menu-item"><a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a></li> -->
 					</ul>

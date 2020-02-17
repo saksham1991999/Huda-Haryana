@@ -24,7 +24,7 @@ class propertyForm(forms.ModelForm):
             'features': _('Features (Multi-Select)'),
         }
         widgets = {
-            'features': forms.SelectMultiple(attrs={'rows':'4'})
+            'features': forms.SelectMultiple(attrs={'style':'height:auto;'})
         }
 
 class contactForm(forms.ModelForm):
@@ -37,9 +37,22 @@ class contactForm(forms.ModelForm):
             'message',
         ]
 
-
+class EnquiryForm(forms.ModelForm):
+    class Meta:
+        model = models.enquiry
+        fields = [
+            'name',
+            'mobile_no',
+            'email',
+            'subject',
+        ]
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = models.User
         fields = ['first_name', 'last_name']
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = models.images
+        fields = ['image']

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -80,12 +80,29 @@ def PropertyView(request, id):
     property = get_object_or_404(models.property, id = id)
     property.views = int(property.views+1)
     property.save()
-    images = models.images.objects.filter(property=property)
-    context = {
-        'property': property,
-        'images': images,
-    }
-    return render(request, 'property.html', context)
+
+    if request.method == 'POST':
+        form = forms.EnquiryForm(request.POST)
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.property = property
+            new_form.save()
+            messages.success(
+                request,
+                'Enquiry sent Successfully',
+                extra_tags='alert alert-success alert-dismissible fade show'
+            )
+            return redirect('core:property', id)
+        else:
+
+            return redirect('core:property', id)
+    else:
+        enquiryform = forms.EnquiryForm()
+        context = {
+            'property': property,
+            'enquiryform': enquiryform,
+        }
+        return render(request, 'property.html', context)
 
 @login_required
 def UserProfileView(request):
@@ -148,10 +165,21 @@ def editProperty(request, id):
 def addProperty(request):
     if request.method == "POST":
         form = forms.propertyForm(request.POST, request.FILES)
+
+        imagesform = forms.ImageForm(request.POST, request.FILES)
+        uploadedimages = request.FILES.getlist('image')
+
         if form.is_valid():
             new_form = form.save(commit = False)
             new_form.owner = request.user
             new_form.save()
+
+            if imagesform.is_valid():
+                for counter, image in enumerate(uploadedimages):
+                    if counter != 0:
+                        imageinput = models.images(property=new_form, image = image)
+                        imageinput.save()
+
             messages.success(
                             request,
                             'Property Added Successfully',
@@ -160,8 +188,10 @@ def addProperty(request):
             return redirect('core:myproperties')
     else:
         form = forms.propertyForm()
+        imagesform = forms.ImageForm()
         context = {
             'form': form,
+            'imagesform': imagesform,
         }
         return render(request, 'dashboard/addproperty.html', context)
 
@@ -240,11 +270,16 @@ def remove_from_bookmark(request, id):
 
 @login_required
 def ComparisonView(request):
+    print("Comparison view")
+
     compare_qs = models.Compare.objects.filter(user=request.user)
+    print(compare_qs)
+
     if compare_qs.exists():
         compare_qs = compare_qs[0]
         properties = compare_qs.properties.all()
-        if len(properties):
+        print(properties)
+        if len(properties) > 1:
             property1 = None
             property2 = None
             property3 = None
@@ -261,6 +296,7 @@ def ComparisonView(request):
             except:
                 pass
 
+            print("ready to open compare list")
             features = models.features.objects.all()
             context = {
                 'properties': properties,
@@ -269,8 +305,13 @@ def ComparisonView(request):
                 'property3':property3,
                 'features':features,
             }
+
             return render(request, 'dashboard/compareproperties.html', context)
+        else:
+            messages.info(request, "You just have 1 property to compare")
+            return redirect('core:properties')
     else:
+
         messages.info(request, "Add to Properties to Compare list to compare")
         return redirect('core:properties')
 
@@ -286,7 +327,7 @@ def add_to_compare(request, id):
             compare.properties.add(property)
             messages.info(request, "Successfully Added to Compare")
     else:
-        compare = models.bookmark.objects.create(user=request.user)
+        compare = models.Compare.objects.create(user=request.user)
         compare.properties.add(property)
         messages.info(request, "Successfully Added to Compare")
     return redirect("core:compare")

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {%  load static %}
+{% load property_template_tag %}
 
 {% block content %}
 
@@ -43,15 +44,15 @@
 
 			<!-- Slider -->
 			<div class="property-slider default">
-                {% for image in images %}
-				<a href="{{ image.image.url }}" data-background-image="images/single-property-01.jpg" class="item mfp-gallery"></a>
+                {% for image in property.images_set.all %}
+				<a href="{{ image.image.url }}" data-background-image="{{ image.image.url }}" class="item mfp-gallery"></a>
 			    {% endfor %}
             </div>
 
 			<!-- Slider Thumbs -->
 			<div class="property-slider-nav">
-                {% for image in images %}
-				<div class="item"><img src="{{ image.image.url }}" alt=""></div>
+                {% for image in property.images_set.all %}
+                    <div class="item"><img src="{{ image.image.url }}" alt=""></div>
 			    {% endfor %}
 
 			</div>
@@ -153,12 +154,17 @@
 
 				<!-- Widget -->
 				<div class="widget margin-bottom-30">
-                    <a href="{% url 'core:addtobookmarks' %}" class="button medium border"><i class="fa fa-star-o"></i>Bookmark</a>
-                    <a href="{% url 'core:removefrombookmarks' %}" class="button medium">Remove from Bookmarks</a>
+                    {% if request.user|added_to_bookmark:property.id  %}
+                    <a href="{% url 'core:removefrombookmarks' property.id %}" class="button medium"><i class="fas fa-star"></i></a>
+                    {% else %}
+                    <a href="{% url 'core:addtobookmarks' property.id %}" class="button medium border"><i class="far fa-star"></i></a>
+                    {% endif %}
 
-                    <a href="{% url 'core:addtocompare' %}" class="button medium border"><i class="icon-compare">Compare</i></a>
-                    <a href="{% url 'core:removefromcompare' %}" class="button medium">Remove from Compare List</a>
-
+                    {% if request.user|added_to_compare:property.id  %}
+                    <a href="{% url 'core:removefromcompare' property.id %}" class="button medium">Remove from Compare List</a>
+                    {% else %}
+                    <a href="{% url 'core:addtocompare' property.id %}" class="button medium border"><i class="icon-compare">Compare</i></a>
+                    {% endif %}
 				</div>
 				<!-- Widget / End -->
 
@@ -183,12 +189,16 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
-
-						<input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$">
-						<input type="text" placeholder="Your Phone">
-						<textarea></textarea>
-						<button class="button fullwidth margin-top-5">Send Message</button>
-					</div>
+                        <form method="POST" role="form">
+                            {% csrf_token %}
+                            {% for field in enquiryform %}
+                            <label>{{ field.label }}</label>
+                            {{ field }}
+                            {{ field.errors }}
+                            {% endfor %}
+						<button class="button fullwidth margin-top-5" type="submit">Send Enquiry</button>
+					    </form>
+                    </div>
 					<!-- Agent Widget / End -->
 
 				</div>

@@ -87,32 +87,32 @@
 
                         <li>
                             <div>Bedrooms</div>
-                            <div>{{ property1.bedrooms }}</div>
-                            <div>{{ property2.bedrooms }}</div>
-                            <div>{{ property3.bedrooms }}</div>
+                            {% if property1 %}<div>{{ property1.bedrooms }}</div>{% endif %}
+                            {% if property2 %}<div>{{ property2.bedrooms }}</div>{% endif %}
+                            {% if property3 %}<div>{{ property3.bedrooms }}</div>{% endif %}
 
                         </li>
 
                         <li>
                             <div>Bathrooms</div>
-                            <div>{{ property1.bathrooms }}</div>
-                            <div>{{ property2.bathrooms }}</div>
-                            <div>{{ property3.bathrooms }}</div>
+                            {% if property1 %}<div>{{ property1.bathrooms }}</div>{% endif %}
+                            {% if property2 %}<div>{{ property2.bathrooms }}</div>{% endif %}
+                            {% if property3 %}<div>{{ property3.bathrooms }}</div>{% endif %}
                         </li>
 
                         <li>
                             <div>Rooms</div>
-                            <div>{{ property1.rooms }}</div>
-                            <div>{{ property2.rooms }}</div>
-                            <div>{{ property3.rooms }}</div>
+                            {% if property1 %}<div>{{ property1.rooms }}</div>{% endif %}
+                            {% if property2 %}<div>{{ property2.rooms }}</div>{% endif %}
+                            {% if property3 %}<div>{{ property3.rooms }}</div>{% endif %}
                         </li>
 
                         {% for feature in features %}
                         <li>
                             <div>{{ feature.title }}</div>
-                            <div>{% if feature in property1.features.all %}<span class="available"></span>{% else %}<span class="not-available"></span>{% endif %}</div>
-                            <div>{% if feature in property2.features.all %}<span class="available"></span>{% else %}<span class="not-available"></span>{% endif %}</div>
-                            <div>{% if feature in property3.features.all %}<span class="available"></span>{% else %}<span class="not-available"></span>{% endif %}</div>
+                            {% if property1 %}<div>{% if feature in property1.features.all %}<span class="available"></span>{% else %}<span class="not-available"></span>{% endif %}</div>{% endif %}
+                            {% if property2 %}<div>{% if feature in property2.features.all %}<span class="available"></span>{% else %}<span class="not-available"></span>{% endif %}</div>{% endif %}
+                            {% if property3 %}<div>{% if feature in property3.features.all %}<span class="available"></span>{% else %}<span class="not-available"></span>{% endif %}</div>{% endif %}
 
                         </li>
                         {% endfor %}

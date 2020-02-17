@@ -98,7 +98,7 @@ class Compare(models.Model):
     properties = models.ManyToManyField(property)
 
     def get_properties(self):
-        properties_compare = self.propeerties.all()[:4]
+        properties_compare = self.properties.all()[:4]
         return properties_compare
 
     def __str__(self):
@@ -116,6 +116,17 @@ class contact(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=200)
     message = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+class enquiry(models.Model):
+    property = models.ForeignKey(property, on_delete=models.CASCADE)
+
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    mobile_no = models.CharField(max_length=10)
+    subject = models.TextField()
 
     def __str__(self):
         return self.name

@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
-
+    'storages',
 
     'core',
     'blog',
@@ -156,3 +156,13 @@ ACCOUNT_USERNAME_REQUIRED = False
 AUTH_USER_MODEL = 'core.User'
 
 django_heroku.settings(locals())
+
+AWS_ACCESS_KEY_ID = ' AKIAWF6VJARJED5XY63X'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'hudaharyana'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_S3_REGION_NAME = 'us-east-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_HOST = 's3.us-east-2.amazonaws.com'

@@ -45,6 +45,12 @@
                         {{ field.errors }}
                         {{ field }}
                     {% endfor %}
+
+                    {% for field in imagesform %}
+                        <label>{{ field.label_tag }}</label>
+                        {{ field.errors }}
+                        {{ field }}
+                    {% endfor %}
 					<button class="button margin-top-20 margin-bottom-20" type = "submit">Save Changes</button>
                 </form>
 
