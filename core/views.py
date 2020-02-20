@@ -3,8 +3,37 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.contrib.auth import authenticate, login, logout
 
 from . import models, forms
+
+
+def SignupView(request):
+    logout(request)
+    if request.method=='POST':
+        form = forms.SingupForm(request.POST, request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            firstname = form.cleaned_data['first_name']
+            lastname = form.cleaned_data['last_name']
+            mobile = form.cleaned_data['mobile']
+            profile_pic = form.cleaned_data['profile_pic']
+            user = models.User.objects.create_user(username=username.lower(), email=email,password=password,
+                                            first_name=firstname, mobile=mobile, profile_pic=profile_pic,
+                                            last_name=lastname)
+            user.save()
+            user = authenticate(request, username=username.lower(), password=password)
+            messages.success(request, 'Thanks for registering {}'.format(user.first_name))
+            return redirect('core:home')
+        else:
+            form = forms.SingupForm(request.POST, request.FILES)
+            messages.error(request, form.errors)
+    else:
+        form = forms.SingupForm()
+    return render(request, 'account/signup.html', {'form': form})
+
 
 def HomeView(request):
     properties = models.property.objects.all()[:4]
@@ -12,6 +41,7 @@ def HomeView(request):
         'properties': properties,
     }
     return render(request, 'index.html', context)
+
 
 def PropertiesView(request):
     allProperties = models.property.objects.all()

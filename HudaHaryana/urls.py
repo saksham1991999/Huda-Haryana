@@ -3,9 +3,11 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
+from core.views import SignupView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/signup/', SignupView, name='signup'),
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls', namespace='core')),
     path('blog/', include('blog.urls', namespace='blog')),

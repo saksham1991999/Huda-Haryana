@@ -61,3 +61,13 @@ class ImagesForm(forms.ModelForm):
         widgets = {
             'image': forms.FileInput(attrs={'multiple': True})
         }
+
+
+class SingupForm(forms.ModelForm):
+    username = forms.CharField(label='Username', min_length=3)
+    password = forms.CharField(label='Password', min_length=6,
+                               widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = models.User
+        fields = ['username', 'password', 'first_name', 'last_name', 'email', 'mobile', 'profile_pic']
