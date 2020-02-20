@@ -22,6 +22,7 @@ class propertyForm(forms.ModelForm):
             'image': _('Main Image'),
             'label': _('Label (Optional)'),
             'features': _('Features (Multi-Select)'),
+            'video': _('Add a Video (Optional)'),
         }
         widgets = {
             'features': forms.SelectMultiple(attrs={'style':'height:auto;'})
@@ -52,7 +53,11 @@ class UserProfileForm(forms.ModelForm):
         model = models.User
         fields = ['first_name', 'last_name']
 
-class ImageForm(forms.ModelForm):
+
+class ImagesForm(forms.ModelForm):
     class Meta:
         model = models.images
         fields = ['image']
+        widgets = {
+            'image': forms.FileInput(attrs={'multiple': True})
+        }

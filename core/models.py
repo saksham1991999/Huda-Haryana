@@ -31,6 +31,9 @@ class features(models.Model):
     def __str__(self):
         return self.title.capitalize()
 
+    class Meta:
+        verbose_name_plural = 'Features'
+
 class property(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     type = models.CharField(choices=type_choices, max_length=1)
@@ -43,7 +46,7 @@ class property(models.Model):
     price_sq = models.FloatField(blank=True, null=True)
     total_price = models.FloatField()
     additional_features = models.TextField(blank = True, null = True)
-    image = models.ImageField()
+    main_image = models.ImageField()
     visible = models.BooleanField(default=True)
     verified = models.BooleanField(default=False)
     views = models.IntegerField(default=0)
@@ -51,6 +54,7 @@ class property(models.Model):
     dateadded = models.DateField(auto_now_add=True)
     rooms = models.IntegerField()
     features = models.ManyToManyField(features)
+    video = models.FileField(blank=True, null=True)
 
     def __str__(self):
         return self.property_name
@@ -75,16 +79,6 @@ class images(models.Model):
 
     class Meta:
         verbose_name_plural = 'Images'
-
-class videos(models.Model):
-    video = models.FileField(upload_to='videos/')
-    property = models.ForeignKey(property, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.property.property_name
-
-    class Meta:
-        verbose_name_plural = 'Videos'
 
 class agent(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

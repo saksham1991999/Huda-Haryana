@@ -166,7 +166,7 @@ def addProperty(request):
     if request.method == "POST":
         form = forms.propertyForm(request.POST, request.FILES)
 
-        imagesform = forms.ImageForm(request.POST, request.FILES)
+        imagesform = forms.ImagesForm(request.POST, request.FILES)
         uploadedimages = request.FILES.getlist('image')
 
         if form.is_valid():
@@ -175,10 +175,9 @@ def addProperty(request):
             new_form.save()
 
             if imagesform.is_valid():
-                for counter, image in enumerate(uploadedimages):
-                    if counter != 0:
-                        imageinput = models.images(property=new_form, image = image)
-                        imageinput.save()
+                for image in uploadedimages:
+                    imageinput = models.images(property=new_form, image = image)
+                    imageinput.save()
 
             messages.success(
                             request,
@@ -188,7 +187,7 @@ def addProperty(request):
             return redirect('core:myproperties')
     else:
         form = forms.propertyForm()
-        imagesform = forms.ImageForm()
+        imagesform = forms.ImagesForm()
         context = {
             'form': form,
             'imagesform': imagesform,

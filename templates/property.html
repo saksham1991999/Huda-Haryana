@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{%  load static %}
+{% load static %}
 {% load property_template_tag %}
 
 {% block content %}
@@ -15,7 +15,7 @@
 				<div class="property-title">
 					<h2>{{ property.property_name }} <span class="property-badge">{{ property.get_type_display }}</span></h2>
 					<span>
-						<a href="#location" class="listing-address">
+						<a href="" class="listing-address">
 							<i class="fa fa-map-marker"></i>
 							{{ property.city }}
 						</a>
@@ -121,18 +121,27 @@
                 {% endif %}
                 {% endcomment %}
 
-                {% with property.videos_set.all|first as video %}
-                {% if video %}
+                <!-- Features -->
+				<h3 class="desc-headline">Features</h3>
+				<ul class="property-features checkboxes margin-top-0">
+                    {% for feature in property.features.all %}
+					    <li>{{ feature.title }}</li>
+                    {% endfor %}
+				</ul>
+
+                {% comment %}
+                {% if property.video %}
 				<!-- Video -->
 				<h3 class="desc-headline no-border">Video</h3>
-				<div class="responsive-iframe">
+				<div class="responsive-iframe" style="margin-bottom: 50px">
                     <video width="560" height="315" controls>
-                        <source src="{{ video.url }}" type="video/mp4">
+                        <source src="{{ property.video.url }}" type="video/mp4">
                     </video>
-					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UPBJKppEXoQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
+					<iframe width="560" height="315" src="{{ property.video.url }}" frameborder="0" allowfullscreen></iframe>
 				</div>
                 {% endif %}
                 {% endwith %}
+                {% endcomment %}
 
                 {% comment %}
 				<!-- Location -->

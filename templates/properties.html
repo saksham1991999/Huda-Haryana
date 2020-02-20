@@ -9,7 +9,7 @@
 <!-- Titlebar
 ================================================== -->
 <div class="parallax titlebar"
-	data-background="images/listings-parallax.jpg"
+	data-background="{% static 'images/banner-1.jpg' %}"
 	data-color="#333333"
 	data-color-opacity="0.7"
 	data-img-width="800"
@@ -101,7 +101,7 @@
 						</div>
 
 						<div class="listing-carousel">
-							<div><img src="{{ property.image.url }}" alt=""></div>
+							<div><img src="{{ property.main_image.url }}" alt=""></div>
 						</div>
 					</a>
 
