@@ -47,6 +47,47 @@ class EnquiryForm(forms.ModelForm):
             'email',
             'subject',
         ]
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Full Name'}),
+            'mobile_no': forms.TextInput(attrs={'placeholder': 'Mobile Number', 'pattern':'[0-9]{10}'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Email ID'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Subject'}),
+        }
+
+class MainEnquiryForm(forms.ModelForm):
+    class Meta:
+        model = models.enquiry
+        fields = [
+            'name',
+            'mobile_no',
+            'email',
+            'subject',
+        ]
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Full Name'}),
+            'mobile_no': forms.TextInput(attrs={'placeholder': 'Mobile Number', 'pattern':'[0-9]{10}'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Email ID'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Subject'}),
+        }
+
+        # widgets = {
+        #     'name': forms.TextInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'sender_email': forms.TextInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'mobile_number': forms.NumberInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'whatsapp_number': forms.NumberInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'street_address': forms.TextInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'city': forms.TextInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'pincode': forms.NumberInput(attrs={'class': 'form-control form-control-lg form-control-a'}),
+        #     'message': forms.Textarea(attrs={'class': 'form-control form-control-lg form-control-a', 'rows': 4}),
+        #     'country': CountrySelectWidget(
+        #         attrs={'class': 'form-control form-control-lg form-control-a', 'style': "margin-bottom: 25px"}),
+        #     'product_quantity': forms.NumberInput(
+        #         attrs={'min': '100', 'class': 'form-control form-control-lg form-control-a',
+        #                'style': "margin-bottom: 25px"}),
+        #     'product': forms.Select(
+        #         attrs={'class': 'form-control form-control-lg form-control-a', 'style': "margin-bottom: 25px"}),
+        #
+        # }
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

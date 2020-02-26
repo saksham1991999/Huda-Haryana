@@ -125,3 +125,17 @@ class enquiry(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = 'Property Enquiries'
+
+class mainenquiry(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    mobile_no = models.CharField(max_length=10)
+    subject = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Main Enquiries'

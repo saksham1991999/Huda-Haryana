@@ -37,8 +37,25 @@ def SignupView(request):
 
 def HomeView(request):
     properties = models.property.objects.all()[:4]
+
+    if request.method == 'POST':
+        form = forms.EnquiryForm(request.POST)
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            new_form.save()
+            messages.success(
+                request,
+                'Enquiry sent Successfully',
+                extra_tags='alert alert-success alert-dismissible fade show'
+            )
+            return redirect('core:home')
+        else:
+            return redirect('core:home')
+
+    form = forms.MainEnquiryForm()
     context = {
         'properties': properties,
+        'form':form,
     }
     return render(request, 'index.html', context)
 

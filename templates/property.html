@@ -201,7 +201,6 @@
                         <form method="POST" role="form">
                             {% csrf_token %}
                             {% for field in enquiryform %}
-                            <label>{{ field.label }}</label>
                             {{ field }}
                             {{ field.errors }}
                             {% endfor %}
