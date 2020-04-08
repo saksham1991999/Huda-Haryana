@@ -20,6 +20,7 @@ requests-oauthlib==1.2.0
 sqlparse==0.2.4
 stripe==2.27.0
 urllib3==1.24.2
+djangorestframework==3.11.0
 
 boto3==1.10.49
 dj-database-url==0.5.0

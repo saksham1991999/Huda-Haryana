@@ -5,7 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 
+from rest_framework import viewsets, status
+from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
+from . import serializers
 from . import models, forms
+
 
 
 def SignupView(request):
@@ -390,3 +394,93 @@ def remove_from_compare(request, id):
     else:
         messages.info(request, "Property does not exist in your Compare List")
     return redirect("core:compare")
+
+
+################################
+################################
+################################
+################################
+################################
+########## API VIEWS ###########
+
+class UserAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+
+class PropertiesAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.PropertySerializer
+    # queryset = UserProfile.objects.all()
+
+    def get_queryset(self):
+        try:
+            userid = self.request.query_params.get('userid', None)
+            properties = models.property.objects.filter(owner__id=userid)
+        except:
+            properties = models.property.objects.all()
+
+        return properties
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+class ImagesAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.ImagesSerializer
+    queryset = models.images.objects.all()
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+class BookmarkAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.BookmarkSerializer
+    # queryset = UserProfile.objects.all()
+
+    def get_queryset(self):
+        try:
+            userid = self.request.query_params.get('userid', None)
+            bookmarks = models.bookmark.objects.filter(owner__id=userid)
+        except:
+            bookmarks = models.bookmark.objects.all()
+        return bookmarks
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+class ContactsAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.ContactSerializer
+    queryset = models.contact.objects.all()
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+class EnquiryAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.EnquirySerializer
+    # queryset = UserProfile.objects.all()
+
+    def get_queryset(self):
+        try:
+            id = self.request.query_params.get('propertyid', None)
+            enquiries = models.enquiry.objects.filter(property__id=id)
+        except:
+            enquiries = models.enquiry.objects.all()
+        return enquiries
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
+
+class MainEnquiryAPIViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.MainEnquirySerializer
+    queryset = models.mainenquiry.objects.all()
+
+    def get_permissions(self):
+        permission_classes = [AllowAny]
+        return [permission() for permission in permission_classes]
