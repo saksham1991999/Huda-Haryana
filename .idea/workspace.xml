@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f07a5c20-39bb-448d-9526-2f194ffedb9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/core/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/HudaHaryana.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HudaHaryana.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HudaHaryana/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/HudaHaryana/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HudaHaryana/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/HudaHaryana/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +199,7 @@
       <workItem from="1583689828549" duration="739000" />
       <workItem from="1585897423173" duration="2553000" />
       <workItem from="1586332202330" duration="679000" />
-      <workItem from="1586337552866" duration="4388000" />
+      <workItem from="1586337552866" duration="5239000" />
     </task>
     <servers />
   </component>
@@ -263,7 +256,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/HudaHaryana/settings.py</url>
-          <line>68</line>
+          <line>67</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

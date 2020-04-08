@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'storages',
     'rest_framework',
-    'corsheaders',
 
     'core',
     'blog',
@@ -150,7 +149,7 @@ EMAIL_HOST_PASSWORD = 's2ksh2m19'
 
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ORIGIN_ALLOW_ALL = True
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
