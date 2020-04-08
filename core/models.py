@@ -68,8 +68,6 @@ class property(models.Model):
     #     else:
     #         return None
 
-
-
 class images(models.Model):
     image = models.ImageField()
     property = models.ForeignKey(property, on_delete=models.CASCADE)
