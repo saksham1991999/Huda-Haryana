@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.contrib.auth import authenticate, login, logout
 
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from . import serializers
 from . import models, forms
 
@@ -426,7 +426,7 @@ class PropertiesAPIViewSet(viewsets.ModelViewSet):
         return properties
 
     def get_permissions(self):
-        permission_classes = [AllowAny]
+        permission_classes = [IsAuthenticatedOrReadOnly]
         return [permission() for permission in permission_classes]
 
 class ImagesAPIViewSet(viewsets.ModelViewSet):

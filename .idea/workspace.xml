@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f07a5c20-39bb-448d-9526-2f194ffedb9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HudaHaryana/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/HudaHaryana/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +85,7 @@
       <recent name="C:\Users\hp\Desktop\Django Projects\Huda-Haryana\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Django server.HudaHaryana">
+  <component name="RunManager" selected="Django Server.HudaHaryana">
     <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="HudaHaryana" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -199,7 +198,8 @@
       <workItem from="1583689828549" duration="739000" />
       <workItem from="1585897423173" duration="2553000" />
       <workItem from="1586332202330" duration="679000" />
-      <workItem from="1586337552866" duration="5239000" />
+      <workItem from="1586337552866" duration="5850000" />
+      <workItem from="1586442038021" duration="307000" />
     </task>
     <servers />
   </component>
@@ -213,29 +213,29 @@
     </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1068" y="153" width="652" height="814" key="#HudaHaryana" timestamp="1586339762471">
       <screen x="0" y="27" width="1866" height="1053" />
     </state>
     <state x="1068" y="153" width="652" height="814" key="#HudaHaryana/0.27.1866.1053@0.27.1866.1053" timestamp="1586339762471" />
-    <state width="1820" height="274" key="GridCell.Tab.0.bottom" timestamp="1586341718331">
+    <state width="1820" height="274" key="GridCell.Tab.0.bottom" timestamp="1586346566815">
       <screen x="0" y="27" width="1866" height="1053" />
     </state>
-    <state width="1820" height="274" key="GridCell.Tab.0.bottom/0.27.1866.1053@0.27.1866.1053" timestamp="1586341718331" />
-    <state width="1820" height="274" key="GridCell.Tab.0.center" timestamp="1586341718328">
+    <state width="1820" height="274" key="GridCell.Tab.0.bottom/0.27.1866.1053@0.27.1866.1053" timestamp="1586346566815" />
+    <state width="1820" height="274" key="GridCell.Tab.0.center" timestamp="1586346566815">
       <screen x="0" y="27" width="1866" height="1053" />
     </state>
-    <state width="1820" height="274" key="GridCell.Tab.0.center/0.27.1866.1053@0.27.1866.1053" timestamp="1586341718328" />
-    <state width="1820" height="274" key="GridCell.Tab.0.left" timestamp="1586341718327">
+    <state width="1820" height="274" key="GridCell.Tab.0.center/0.27.1866.1053@0.27.1866.1053" timestamp="1586346566815" />
+    <state width="1820" height="274" key="GridCell.Tab.0.left" timestamp="1586346566815">
       <screen x="0" y="27" width="1866" height="1053" />
     </state>
-    <state width="1820" height="274" key="GridCell.Tab.0.left/0.27.1866.1053@0.27.1866.1053" timestamp="1586341718327" />
-    <state width="1820" height="274" key="GridCell.Tab.0.right" timestamp="1586341718330">
+    <state width="1820" height="274" key="GridCell.Tab.0.left/0.27.1866.1053@0.27.1866.1053" timestamp="1586346566815" />
+    <state width="1820" height="274" key="GridCell.Tab.0.right" timestamp="1586346566815">
       <screen x="0" y="27" width="1866" height="1053" />
     </state>
-    <state width="1820" height="274" key="GridCell.Tab.0.right/0.27.1866.1053@0.27.1866.1053" timestamp="1586341718330" />
+    <state width="1820" height="274" key="GridCell.Tab.0.right/0.27.1866.1053@0.27.1866.1053" timestamp="1586346566815" />
     <state x="422" y="188" width="1022" height="737" key="SettingsEditor" timestamp="1586341076342">
       <screen x="0" y="27" width="1866" height="1053" />
     </state>
