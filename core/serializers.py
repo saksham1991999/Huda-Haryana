@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
 
+
 class PropertySerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name="property-detail")
 

@@ -13,7 +13,7 @@ router.register('bookmark', BookmarkAPIViewSet, basename='bookmark')
 router.register('main-enquiry', MainEnquiryAPIViewSet, basename='main-enquiry')
 router.register('contact', ContactsAPIViewSet, basename='contact')
 router.register('images', ImagesAPIViewSet, basename='images')
-router.register('properties', PropertiesAPIViewSet, basename='properties')
+router.register('property', PropertiesAPIViewSet, basename='property')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -417,17 +417,55 @@ class PropertiesAPIViewSet(viewsets.ModelViewSet):
     # queryset = UserProfile.objects.all()
 
     def get_queryset(self):
-        try:
+        properties =  models.property.objects.filter(visible=True, verified=True)
+
+        if self.request.query_params.get('minprice', None):
+            minprice = self.request.query_params.get('minprice', None)
+            properties = properties.filter(total_price__gte = minprice)
+
+        if self.request.query_params.get('maxprice', None):
+            maxprice = self.request.query_params.get('maxprice', None)
+            properties = properties.filter(total_price__lte=maxprice)
+
+        if self.request.query_params.get('minbhk', None):
+            minbhk = self.request.query_params.get('minbhk', None)
+            properties = properties.filter(bedrooms__gte = minbhk)
+
+        if self.request.query_params.get('maxbhk', None):
+            maxbhk = self.request.query_params.get('maxbhk', None)
+            properties = properties.filter(bedrooms__lte=maxbhk)
+
+        if self.request.query_params.get('city', None):
+            city = self.request.query_params.get('city', None)
+            properties = properties.filter( city__icontains = city)
+
+        if self.request.query_params.get('type', None):
+            type = self.request.query_params.get('type', None)
+            properties = properties.filter(type=type)
+
+        if self.request.query_params.get('place', None):
+            place = self.request.query_params.get('place', None)
+            properties = properties.filter(additional_features__ic=place)
+
+        if self.request.query_params.get('userid', None):
             userid = self.request.query_params.get('userid', None)
-            properties = models.property.objects.filter(owner__id=userid)
-        except:
-            properties = models.property.objects.all()
+            properties = properties.filter(owner__id=userid)
+
+        if self.request.query_params.get('orderby', None):
+            orderby = self.request.query_params.get('orderby', None)
+            if orderby == 'price':
+                properties = properties.order_by('total_price')
+            elif orderby == 'bhk':
+                properties = properties.order_by('bedrooms')
+            elif orderby == 'views':
+                properties = properties.order_by('-views')
 
         return properties
 
     def get_permissions(self):
         permission_classes = [IsAuthenticatedOrReadOnly]
         return [permission() for permission in permission_classes]
+
 
 class ImagesAPIViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ImagesSerializer
