@@ -39,3 +39,8 @@ gunicorn==20.0.4
 Jinja2==2.10.3
 s3transfer==0.2.1
 requests==2.21.0
+
+django-cors-headers
+html5lib
+bs4
+git+https://github.com/narenchoudhary/django-indian-numbers

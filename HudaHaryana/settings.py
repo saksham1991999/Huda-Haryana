@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'storages',
     'rest_framework',
+    'corsheaders',
+    'indian_numbers',
 
     'core',
     'blog',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -140,16 +143,17 @@ LOGIN_REDIRECT_URL = '/'
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # EMAIL
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'saksham191999@gmail.com'
-EMAIL_HOST_PASSWORD = 's2ksh2m19'
+EMAIL_HOST_USER = 'homeplanify@gmail.com'
+EMAIL_HOST_PASSWORD = 'Kunal_0001'
 
 PHONENUMBER_DB_FORMAT = 'NATIONAL'
 
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -157,7 +161,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 AUTH_USER_MODEL = 'core.User'
 
-django_heroku.settings(locals())
+
 
 AWS_ACCESS_KEY_ID = ' AKIAWF6VJARJED5XY63X'
 AWS_SECRET_ACCESS_KEY = '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'
@@ -168,3 +172,5 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_S3_HOST = 's3.us-east-2.amazonaws.com'
+
+django_heroku.settings(locals())

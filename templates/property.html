@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load property_template_tag %}
-
+{% load indian_numbers_tags %}
 {% block content %}
 
 <!-- Titlebar
@@ -23,9 +23,9 @@
 				</div>
 
 				<div class="property-pricing">
-					<div class="property-price">₹ {{ property.total_price }}</div>
+					<div class="property-price">₹ {{ property.total_price|floatword_indian }}</div>
 					{% if property.price_sq %}
-                    <div class="sub-price">₹ {{ property.price_sq }} / sq ft</div>
+                    <div class="sub-price">₹ {{ property.price_sq|floatword_indian }} / sq ft</div>
                     {% endif %}
 				</div>
 
@@ -129,19 +129,30 @@
                     {% endfor %}
 				</ul>
 
-                {% comment %}
-                {% if property.video %}
+
+                {% if property.youtube_video %}
 				<!-- Video -->
 				<h3 class="desc-headline no-border">Video</h3>
 				<div class="responsive-iframe" style="margin-bottom: 50px">
                     <video width="560" height="315" controls>
-                        <source src="{{ property.video.url }}" type="video/mp4">
+                        <source src="{{ property.youtube_video }}" type="video/mp4">
                     </video>
-					<iframe width="560" height="315" src="{{ property.video.url }}" frameborder="0" allowfullscreen></iframe>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ property.youtube_video }}" frameborder="0" allowfullscreen></iframe>
 				</div>
                 {% endif %}
-                {% endwith %}
-                {% endcomment %}
+
+                {% if property.youtube_video_2 %}
+				<!-- Video -->
+				<h3 class="desc-headline no-border">Video</h3>
+				<div class="responsive-iframe" style="margin-bottom: 50px">
+                    <video width="560" height="315" controls>
+                        <source src="{{ property.youtube_video_2 }}" type="video/mp4">
+                    </video>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ property.youtube_video_2 }}" frameborder="0" allowfullscreen></iframe>
+				</div>
+                {% endif %}
+
+
 
                 {% comment %}
 				<!-- Location -->

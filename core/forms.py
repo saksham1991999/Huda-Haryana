@@ -6,7 +6,7 @@ from . import models
 class propertyForm(forms.ModelForm):
     class Meta:
         model = models.property
-        exclude = ['verified', 'views', 'owner', 'visible', 'dateadded']
+        exclude = ['verified', 'views', 'owner', 'visible', 'dateadded', 'featured']
         labels = {
             'type': _('Select Type'),
             'property_name': _('Property Name'),

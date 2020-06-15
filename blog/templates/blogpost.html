@@ -54,6 +54,7 @@
 
                     <p>{{ post.content|escape|linebreaks }}</p>
 
+                    {% comment %}
 					<!-- Share Buttons -->
 					<ul class="share-buttons margin-top-40 margin-bottom-0">
 						<li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>
@@ -61,11 +62,18 @@
 						<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>
 						<li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li>
 					</ul>
+					{% endcomment %}
 					<div class="clearfix"></div>
 
 				</div>
 			</div>
 			<!-- Blog Post / End -->
+
+            <!-- About Author -->
+			<div class="about-author">
+					<h4>Courtesy</h4>
+					<a href="{{ post.courtesy_url }}">{{ post.courtesy_title }}</a>
+			</div>
 
 			<div class="margin-top-50"></div>
 
@@ -131,7 +139,7 @@
 			<div class="widget">
 				<h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>
 				<div class="search-blog-input">
-                <form action="{% url 'exams:currentaffairs' %}">
+                <form action="{% url 'blog:home' %}">
                   <input type="search" class="search-field" placeholder="Search Current Affairs" aria-label="Search" name='search' value="{{search_term}}">
                 </form>
                 </div>
@@ -142,20 +150,20 @@
 			<!-- Widget -->
 			<div class="widget">
 
-				<h3>Popular Posts</h3>
+				<h3>Recent Posts</h3>
 				<ul class="widget-tabs">
 
-                    {% for currentaffair in currentaffairs %}
+                    {% for post in recent_posts %}
 					<!-- Post #1 -->
 					<li>
 						<div class="widget-content">
 								<div class="widget-thumb">
-								<a href="{% url 'exams:currentaffair' currentaffair.id %}"><img src="{{ currentaffair.image.url }}" alt=""></a>
+								<a href="{% url 'blog:post' post.id %}"><img src="{{ post.main_image.url }}" alt=""></a>
 							</div>
 
 							<div class="widget-text">
-								<h5><a href="{% url 'exams:currentaffair' currentaffair.id %}">{{ currentaffair.title }}</a></h5>
-								<span>{{ currentaffair.postedon|date }}</span>
+								<h5><a href="{% url 'blog:post' post.id %}">{{ post.title }}</a></h5>
+								<span>{{ post.date|date }}</span>
 							</div>
 							<div class="clearfix"></div>
 						</div>

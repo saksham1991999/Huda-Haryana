@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load indian_numbers_tags %}
 
 {% block content %}
 <!-- Wrapper -->
@@ -140,7 +140,7 @@
                                 </div>
 
                                 <div class="listing-img-content">
-                                    <span class="listing-compact-title">{{ property.property_name }} <i>₹ {{ property.total_price }}</i></span>
+                                    <span class="listing-compact-title">{{ property.property_name }} <i>₹ {{ property.total_price|floatword_indian }}</i></span>
 
                                     <ul class="listing-hidden-content">
                                         <li>City <span>{{ property.city }}</span></li>
@@ -309,6 +309,44 @@
     </div>
     <!-- Container / End -->
 
+    <!-- Fullwidth Section -->
+    <section class="fullwidth margin-top-95 margin-bottom-0">
+
+        <!-- Box Headline -->
+        <h3 class="headline-box">Articles & Tips</h3>
+
+        <div class="container">
+            <div class="row">
+
+                {% for post in recent_posts %}
+                <div class="col-md-4">
+
+                    <!-- Blog Post -->
+                    <div class="blog-post">
+
+                        <!-- Img -->
+                        <a href="{% url 'blog:post' post.id %}" class="post-img">
+                            <img src="{{ post.main_image.url }}" alt="">
+                        </a>
+
+                        <!-- Content -->
+                        <div class="post-content">
+                            <h3><a href="{% url 'blog:post' post.id %}">{{ post.title }}</a></h3>
+                            <p>{{ post.get_shortest_content }}</p>
+
+                            <a href="{% url 'blog:post' post.id %}" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+                        </div>
+
+                    </div>
+                    <!-- Blog Post / End -->
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <!-- Fullwidth Section / End -->
 
     <!-- Fullwidth Section -->
     <section class="fullwidth margin-top-105 margin-bottom-0 padding-bottom-80 padding-top-95" data-background-color="#f7f7f7">

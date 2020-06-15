@@ -80,12 +80,22 @@
 								</li>
 							</ul>-->
 						</li>
-
-
-						<li><a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
+                        <li><a href="{% url 'core:districts' %}" {% if request.resolver_match.view_name == 'core:districts' %}class="current"{% endif %}>Maps</a>
 						</li>
+
+
 						<li>
                             <a href="{% url 'core:compare' %}" {% if request.resolver_match.view_name == 'core:compare' %}class="current"{% endif %}>Compare</a>
+						</li>
+						<li>
+                            <a href="{% url 'core:news' %}" {% if request.resolver_match.view_name == 'core:news' %}class="current"{% endif %}>News</a>
+						</li>
+
+						<li>
+                            <a href="{% url 'blog:home' %}" {% if request.resolver_match.view_name == 'blog:home' %}class="current"{% endif %}>Blogs</a>
+						</li>
+						<li>
+                            <a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
 						</li>
 <!-- 						<li class="right-side-menu-item"><a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a></li> -->
 					</ul>
@@ -113,12 +123,20 @@
 								</li>
 							</ul>-->
 						</li>
+                        <li><a href="{% url 'core:districts' %}" {% if request.resolver_match.view_name == 'core:districts' %}class="current"{% endif %}>Maps</a>
+						</li>
 
 						<li>
-                            <a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
+                            <a href="{% url 'core:compare' %}" {% if request.resolver_match.view_name == 'core:compare' %}class="current"{% endif %}>Compare</a>
 						</li>
 						<li>
-                            <a href="{% url 'core:compare' %}" {% if request.resolver_match.view_name == 'core:compare' %}class="current"{% endif %}>Compare</a>
+                            <a href="{% url 'core:news' %}" {% if request.resolver_match.view_name == 'core:news' %}class="current"{% endif %}>News</a>
+						</li>
+						<li>
+                            <a href="{% url 'blog:home' %}" {% if request.resolver_match.view_name == 'blog:home' %}class="current"{% endif %}>Blogs</a>
+						</li>
+                        <li>
+                            <a href="{% url 'core:contact' %}" {% if request.resolver_match.view_name == 'core:contact' %}class="current"{% endif %}>Contact Us</a>
 						</li>
 <!-- 						<li class="right-side-menu-item"><a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a></li> -->
 					</ul>

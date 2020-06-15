@@ -9,7 +9,29 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 from . import serializers
 from . import models, forms
+from blog import models as blogmodels
+import requests
+from bs4 import BeautifulSoup
 
+
+def get_news():
+    URL = "https://www.hsvphry.org.in/Pages/HudaNewsAndUpdate.aspx"
+    r = requests.get(URL)
+    # print(r.content)
+    soup = BeautifulSoup(r.content, 'html5lib')
+
+    table = soup.find_all('div', attrs = {'class':'ms-WPBody'})
+    newsdiv = table[2]
+    news = []
+    for i in newsdiv.find_all('a'):
+        dict = {
+            'news':i.text,
+            'pdf':i.attrs['href'],
+        }
+        news.append(dict)
+        # print(dict)
+        # news.append([i.text, i.attrs['href']])
+    return news
 
 
 def SignupView(request):
@@ -38,10 +60,50 @@ def SignupView(request):
         form = forms.SingupForm()
     return render(request, 'account/signup.html', {'form': form})
 
+def LoginView(request):
+    logout(request)
+    if request.method == 'POST':
+        type = request.POST['type']
+        mobile = request.POST['phone_num']
+        password = request.POST['password']
+
+        if type == 'login':
+            try:
+                user = authenticate(request, username=mobile, password=password)
+                if user.mobile_verified:
+                    login(request, user)
+                    if user.is_vendor:
+                        redirect('vendor:dashboard')
+                    else:
+                        return redirect('customer:dashboard')
+            except:
+                messages.error(request, 'Invalid Credentials', extra_tags = 'alert alert-warning alert-dismissible')
+                return redirect('core:login')
+        elif type == 'register':
+            try:
+                email = request.POST['email_id']
+                full_name = request.POST['full_name']
+                user = models.User.objects.create_user(username=mobile, email=email, password=password)
+                lname = ''
+                fname, lname = full_name.split()
+                user.first_name = fname
+                user.last_name = lname
+                user.mobile = mobile
+                user.save()
+                request.session['mobile'] = mobile
+                request.session['password'] = password
+                return redirect('core:register_otp_verification')
+            except:
+                messages.error(request, 'Mobile Already Registered', extra_tags='alert alert-warning alert-dismissible')
+        return redirect('core:login')
+    else:
+        context = {
+        }
+        return render(request, 'login.html', context)
 
 def HomeView(request):
-    properties = models.property.objects.all()[:4]
-
+    properties = models.property.objects.filter(featured = True)[:4]
+    recent_posts = blogmodels.post.objects.all().order_by('-date')[:3]
     if request.method == 'POST':
         form = forms.EnquiryForm(request.POST)
         if form.is_valid():
@@ -60,9 +122,17 @@ def HomeView(request):
     context = {
         'properties': properties,
         'form':form,
+        'recent_posts':recent_posts,
     }
     return render(request, 'index.html', context)
 
+def NewsView(request):
+    news = get_news()
+    context = {
+        'newslist':news,
+    }
+
+    return render(request, 'news.html' , context)
 
 def PropertiesView(request):
     allProperties = models.property.objects.all()
@@ -395,6 +465,20 @@ def remove_from_compare(request, id):
         messages.info(request, "Property does not exist in your Compare List")
     return redirect("core:compare")
 
+def DistrictsView(request):
+    districts = models.District.objects.all()
+    context = {
+        'districts':districts,
+    }
+    return render(request, 'districts.html', context)
+
+def MapsView(request, id):
+    district = get_object_or_404(models.District, id=id)
+    areas = models.Area.objects.filter(district =district)
+    context = {
+        'areas':areas,
+    }
+    return render(request, 'maps.html', context)
 
 ################################
 ################################
@@ -522,3 +606,4 @@ class MainEnquiryAPIViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         permission_classes = [AllowAny]
         return [permission() for permission in permission_classes]
+

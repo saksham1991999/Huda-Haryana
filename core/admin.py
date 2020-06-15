@@ -70,3 +70,6 @@ admin.site.register(models.contact)
 admin.site.register(models.bookmark)
 admin.site.register(models.Compare)
 admin.site.register(models.enquiry)
+
+admin.site.register(models.District)
+admin.site.register(models.Area)

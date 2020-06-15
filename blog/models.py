@@ -25,6 +25,8 @@ class post(models.Model):
     image2 = models.ImageField(blank=True, null=True)
     image3 = models.ImageField(blank=True, null=True)
     image4 = models.ImageField(blank=True, null=True)
+    courtesy_title = models.CharField(max_length=256)
+    courtesy_url = models.CharField(max_length=512)
     
     def __str__(self):
         return self.title

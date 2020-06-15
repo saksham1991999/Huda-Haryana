@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {%  load static %}
-
+{% load indian_numbers_tags %}
 {% block content %}
 
 <!-- Wrapper -->
@@ -33,7 +33,7 @@
 <div class="container">
 	<div class="row sticky-wrapper">
 
-		<div class="col-md-8">
+		<div class="col-md-12">
 
             <!-- Row With Forms -->
             <div class="row with-forms">
@@ -75,6 +75,15 @@
 						</div>
 					</div>
 				</div>
+
+                <div class="col-md-6">
+					<!-- Layout Switcher -->
+					<div class="layout-switcher">
+						<a href="#" class="list"><i class="fa fa-th-list"></i></a>
+						<a href="#" class="grid"><i class="fa fa-th-large"></i></a>
+						<a href="#" class="grid-three"><i class="fa fa-th"></i></a>
+					</div>
+				</div>
             </div>
 
 
@@ -95,7 +104,7 @@
 						{% endcomment %}
 
 						<div class="listing-img-content">
-							<span class="listing-price"><i>₹ {{ property.total_price }}</i></span>
+							<span class="listing-price"><i>₹ {{ property.total_price|floatword_indian }}</i></span>
 							<span class="like-icon with-tip" data-tip-content="Add to Bookmarks"></span>
 							<span class="compare-button with-tip" data-tip-content="Add to Compare"></span>
 						</div>

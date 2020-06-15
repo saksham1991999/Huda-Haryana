@@ -54,7 +54,10 @@ class property(models.Model):
     dateadded = models.DateField(auto_now_add=True)
     rooms = models.IntegerField()
     features = models.ManyToManyField(features)
+    youtube_video = models.CharField(max_length=512, blank=True, null=True, verbose_name='Youtube Video ID')
+    youtube_video_2 = models.CharField(max_length=512, blank=True, null=True, verbose_name='Youtube 2nd Video ID')
     video = models.FileField(blank=True, null=True)
+    featured = models.BooleanField(default=False)
 
     def __str__(self):
         return self.property_name
@@ -137,3 +140,17 @@ class mainenquiry(models.Model):
 
     class Meta:
         verbose_name_plural = 'Main Enquiries'
+
+class District(models.Model):
+    title = models.CharField(max_length=256)
+    image = models.ImageField()
+
+    def get_no_of_areas(self):
+        total = Area.objects.filter(district=self).count()
+        return total
+
+class Area(models.Model):
+    district = models.ForeignKey('core.District', on_delete=models.PROTECT)
+    title = models.CharField(max_length=256)
+    image = models.ImageField()
+
